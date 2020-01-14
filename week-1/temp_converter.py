@@ -56,4 +56,5 @@ for rounds in range(numRepitions):
             inputFormat,
             convertFahrenheitToCelcius(inputDegrees)
             )
-    print("Thanks for using this tool :)")
+
+print("Thanks for using this tool :)")
