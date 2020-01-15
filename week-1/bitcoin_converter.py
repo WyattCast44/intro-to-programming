@@ -27,7 +27,40 @@ That is worth 1043 us dollars.
 # Given
 
 """
-//
+- Convert bitcoin to usd
+- First display to the user the date and time the coversion data was obtained
+- User then inputs amount in bitcoin
 """
 
 # Solution
+
+sourceDate = "14-Jan-2020 at 04:17 PM"
+sourceUrl = "https://www.coindesk.com/calculator"
+usdConversion = 8822.82
+
+def printWithBuffer(message):
+    print()
+    print(message)
+    print()
+
+def printSourceAndDate():
+    printWithBuffer(f'As of {sourceDate}, bitcoin is currently trading at ${usdConversion} per bitcoin. ({sourceUrl})')
+
+def promptUserForBitcoinAmount():
+    return float(input("Please enter the bitcoin amount: "))
+
+def convertBitCoinToUSD(bitcoinAmount):
+    return bitcoinAmount * usdConversion
+
+def printConvertedAmount(bitcoinAmount, convertedAmount):
+    printWithBuffer(f'{bitcoinAmount} bitcoin is worth ${convertedAmount}')
+
+printSourceAndDate()
+
+inputAmount = promptUserForBitcoinAmount()
+
+convertedAmount = round(convertBitCoinToUSD(inputAmount), 2)
+
+printConvertedAmount(inputAmount, convertedAmount)
+
+print("Thanks for using this tool :)")
