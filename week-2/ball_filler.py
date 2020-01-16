@@ -38,8 +38,7 @@ inputBallVolume = float(input("What is the core volume in inches cubed? "))
 print()
 
 def sphereVolume(diameter):
-    result = (4/3) * math.pi * (diameter/2) ** 3
-    return result
+    return (4/3) * math.pi * (diameter/2) ** 3
 
 fillableVolumePerBall = sphereVolume(inputBallDiameter) - inputBallVolume
 
