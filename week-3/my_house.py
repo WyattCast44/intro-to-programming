@@ -30,6 +30,8 @@ import graphics as g
 WINDOW_WIDTH = 500
 WINDOW_HEIGHT = 300
 WINDOW_CAPTION = "My House"
+WINDOW_BACKGROUND_DAY = g.color_rgb(237, 235, 218)
+WINDOW_BACKGROUND_NIGHT = g.color_rgb(140, 147, 219)
 
 def ptFromBottomLeft(x, y):
     # Used to reset the negative y axis
@@ -49,6 +51,11 @@ HOUSE_COLOR = g.color_rgb(166, 149, 108)
 # Roof
 ROOF_COLOR = g.color_rgb(181, 88, 65)
 
+def createWindow():
+    win = g.GraphWin(WINDOW_CAPTION, WINDOW_WIDTH, WINDOW_HEIGHT)
+    win.setBackground(WINDOW_BACKGROUND_DAY)
+    return win
+
 def drawGround(win):
     ground = g.Rectangle(ptFromBottomLeft(0,0), ptFromBottomLeft(WINDOW_WIDTH, GROUND_HEIGHT))
     ground.setOutline(GROUND_COLOR)
@@ -62,18 +69,24 @@ def drawHouse(win):
     house.draw(win)
 
 def drawRoof(win):
-    roof = g.Polygon(g.Point(0,0), g.Point(175,0), g.Point(87.5, -35), g.Point(0,0))
+    roof = g.Polygon(g.Point(0,0), g.Point(HOUSE_WIDTH,0), g.Point(HOUSE_WIDTH/2, -35), g.Point(0,0))
     roof.setFill(ROOF_COLOR)
     roof.setOutline(ROOF_COLOR)
-    roof.move(WINDOW_WIDTH/2, HOUSE_TOP_RIGHT.getY())
+    roof.move((WINDOW_WIDTH / 2) - (HOUSE_WIDTH / 2), HOUSE_TOP_RIGHT.getY())
     roof.draw(win)
 
+def drawSun(win):
+    sun = g.Circle(g.Point(0,0), 50)
+    sun.setFill(g.color_rgb(242, 219, 104))
+    sun.setOutline(g.color_rgb(242, 219, 104))
+    sun.draw(win)
 
 def main():
-    win = g.GraphWin(WINDOW_CAPTION, WINDOW_WIDTH, WINDOW_HEIGHT)
+    win = createWindow()
     drawGround(win)
     drawHouse(win)
     drawRoof(win)
+    drawSun(win)
     win.getMouse()
 
 main()
