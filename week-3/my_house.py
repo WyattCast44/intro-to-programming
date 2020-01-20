@@ -14,12 +14,12 @@ In a graphics window, you are to draw an outdoor scene containing a house.
 Your drawing should include at least the following shapes:
 
 three rectangles ✅
-two lines
+two lines ✅
 one circle ✅
 one text label ✅
-Your picture should not be boring black and white. It should include at least three colors, tastefully distributed to bring your house to life.
+Your picture should not be boring black and white. It should include at least three colors, tastefully distributed to bring your house to life. ✅
 
-Finally, it should have some interactive feature such that when a user clicks on your picture something changes (e.g. a color changes, a tree falls over, the sun rises, a door opens). The change only has to happen once.
+Finally, it should have some interactive feature such that when a user clicks on your picture something changes (e.g. a color changes, a tree falls over, the sun rises, a door opens). The change only has to happen once. ✅
 """
 
 # Solution
@@ -54,14 +54,14 @@ def drawSun(win):
     return sun
 
 def drawMercury(win):
-    mercury = Circle(Point(percentWidth(45), percentHeight(22)), 3)
+    mercury = Circle(Point(percentWidth(25), percentHeight(12)), 3)
     mercury.setFill(color_rgb(168, 164, 151))
     mercury.setOutline('black')
     mercury.draw(win)
     return mercury
 
 def drawVenus(win):
-    venus = Circle(Point(percentWidth(30), percentHeight(10)), 8)
+    venus = Circle(Point(percentWidth(42), percentHeight(16)), 8)
     venus.setFill(color_rgb(224, 21, 2))
     venus.setOutline('black')
     venus.draw(win)
@@ -93,6 +93,21 @@ def drawBase(win):
     base.setWidth(2)
     base.draw(win)
 
+    line1 = Line(Point(percentWidth(50), percentHeight(75)), Point(percentWidth(50), percentHeight(65)))
+    line1.setOutline(color_rgb(92, 131, 156))
+    line1.setWidth(2)
+    line1.draw(win)
+
+    line2 = Line(Point(percentWidth(50), percentHeight(75)), Point(percentWidth(55), percentHeight(69)))
+    line2.setOutline(color_rgb(92, 131, 156))
+    line2.setWidth(2)
+    line2.draw(win)
+
+    line3 = Line(Point(percentWidth(50), percentHeight(75)), Point(percentWidth(45), percentHeight(69)))
+    line3.setOutline(color_rgb(92, 131, 156))
+    line3.setWidth(2)
+    line3.draw(win)
+
     door = createRectangle(percentWidth(48), percentHeight(15), 10, 18)
     door.setFill(color_rgb(64, 68, 71))
     door.setOutline('black')
@@ -108,6 +123,7 @@ def drawMessage(win):
     return message
 
 def drawLaunchPad(win):
+    
     pad = createRectangle(percentWidth(64), percentHeight(20), 40, 10)
     pad.setFill(color_rgb(64, 68, 71))
     pad.setOutline('black')
