@@ -42,6 +42,10 @@ HOUSE_WIDTH = 150
 HOUSE_HEIGHT = 75
 HOUSE_COLOR = color_rgb(166, 149, 108)
 
+# Sun/Moon
+SUN_COLOR = color_rgb(242, 219, 104)
+MOON_COLOR = color_rgb(177, 181, 204)
+
 # Roof
 ROOF_COLOR = color_rgb(181, 88, 65)
 
@@ -60,21 +64,37 @@ def createWindow():
     return win
 
 def drawGround(win):
-    rect = createRectangle(0, 0, percentWidth(100), GROUND_HEIGHT)
-    rect.setFill(GROUND_COLOR)
-    rect.setWidth(0)
-    rect.draw(win)
-    return rect
+    ground = createRectangle(0, 0, percentWidth(100), GROUND_HEIGHT)
+    ground.setFill(GROUND_COLOR)
+    ground.setWidth(0)
+    ground.draw(win)
+    returkn ground
 
 def drawHouse(win):
-    rect = createRectangle((WINDOW_WIDTH - HOUSE_WIDTH)/2, GROUND_HEIGHT, HOUSE_WIDTH, HOUSE_HEIGHT)
-    rect.setFill(HOUSE_COLOR)
-    rect.setWidth(0)
-    rect.draw(win)
-    return rect
+    house = createRectangle((WINDOW_WIDTH - HOUSE_WIDTH)/2, GROUND_HEIGHT, HOUSE_WIDTH, HOUSE_HEIGHT)
+    house.setFill(HOUSE_COLOR)
+    house.setWidth(0)
+    house.draw(win)
+    return house
 
 def drawRoof(win):
-    print('eh')
+    print()
+
+def drawSun(win):
+    sun = Circle(Point(0,0), 50)
+    sun.setFill(SUN_COLOR)
+    sun.setOutline(SUN_COLOR)
+    sun.draw(win)
+    return sun
+
+def changeSceneToNight(win, sun):
+    win.setBackground(WINDOW_BACKGROUND_NIGHT)
+    sun.setFill(MOON_COLOR)
+    sun.setOutline(MOON_COLOR)
+
+def writeMessage(win):
+    message = Text(Point(percentWidth(50), percentHeight(93)), "MY HOUSE")
+    message.draw(win)
 
 def waitForClick(win):
     win.getMouse()
@@ -84,6 +104,10 @@ def main():
     ground = drawGround(win)
     house = drawHouse(win)
     roof = drawRoof(win)
+    sun = drawSun(win)
+    writeMessage(win)
+    waitForClick(win)
+    changeSceneToNight(win, sun)
     waitForClick(win)
 
 main()
