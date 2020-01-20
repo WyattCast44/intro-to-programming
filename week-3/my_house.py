@@ -13,10 +13,10 @@ In a graphics window, you are to draw an outdoor scene containing a house.
 
 Your drawing should include at least the following shapes:
 
-three rectangles
-two lines
+three rectangles - Need one more
+two lines - need two
 one circle
-one text label
+one text label - Need this
 Your picture should not be boring black and white. It should include at least three colors, tastefully distributed to bring your house to life.
 
 Finally, it should have some interactive feature such that when a user clicks on your picture something changes (e.g. a color changes, a tree falls over, the sun rises, a door opens). The change only has to happen once.
@@ -31,7 +31,7 @@ WINDOW_WIDTH = 500
 WINDOW_HEIGHT = 300
 WINDOW_CAPTION = "My House"
 WINDOW_BACKGROUND_DAY = g.color_rgb(237, 235, 218)
-WINDOW_BACKGROUND_NIGHT = g.color_rgb(140, 147, 219)
+WINDOW_BACKGROUND_NIGHT = g.color_rgb(52, 63, 138)
 
 def ptFromBottomLeft(x, y):
     # Used to reset the negative y axis
@@ -80,13 +80,24 @@ def drawSun(win):
     sun.setFill(g.color_rgb(242, 219, 104))
     sun.setOutline(g.color_rgb(242, 219, 104))
     sun.draw(win)
+    return sun
+
+def changeToNightOnClick(win):
+    win.getMouse()
+    win.setBackground(WINDOW_BACKGROUND_NIGHT)
+    
+def changeSunToMoon(sun):
+    sun.setFill(g.color_rgb(177, 181, 204))
+    sun.setOutline(g.color_rgb(177, 181, 204))
 
 def main():
     win = createWindow()
     drawGround(win)
     drawHouse(win)
     drawRoof(win)
-    drawSun(win)
+    sun = drawSun(win)
+    changeToNightOnClick(win)
+    changeSunToMoon(sun)
     win.getMouse()
 
 main()
