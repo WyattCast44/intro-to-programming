@@ -24,81 +24,66 @@ Finally, it should have some interactive feature such that when a user clicks on
 
 # Solution
 
-import graphics as g
+from graphics import *
 
 # Window
 WINDOW_WIDTH = 500
 WINDOW_HEIGHT = 300
 WINDOW_CAPTION = "My House"
-WINDOW_BACKGROUND_DAY = g.color_rgb(237, 235, 218)
-WINDOW_BACKGROUND_NIGHT = g.color_rgb(52, 63, 138)
-
-def ptFromBottomLeft(x, y):
-    # Used to reset the negative y axis
-    return g.Point(x, WINDOW_HEIGHT - y)
+WINDOW_BACKGROUND_DAY = color_rgb(237, 235, 218)
+WINDOW_BACKGROUND_NIGHT = color_rgb(52, 63, 138)
 
 # Ground
 GROUND_HEIGHT = 50
-GROUND_COLOR = g.color_rgb(108, 166, 119)
+GROUND_COLOR = color_rgb(108, 166, 119) 
 
 # House
 HOUSE_WIDTH = 150
 HOUSE_HEIGHT = 75
-HOUSE_BOTTOM_LEFT = ptFromBottomLeft((WINDOW_WIDTH / 2) - (HOUSE_WIDTH / 2), GROUND_HEIGHT)
-HOUSE_TOP_RIGHT = ptFromBottomLeft((WINDOW_WIDTH / 2) + (HOUSE_WIDTH / 2), GROUND_HEIGHT + HOUSE_HEIGHT)
-HOUSE_COLOR = g.color_rgb(166, 149, 108)
+HOUSE_COLOR = color_rgb(166, 149, 108)
 
 # Roof
-ROOF_COLOR = g.color_rgb(181, 88, 65)
+ROOF_COLOR = color_rgb(181, 88, 65)
+
+def percentWidth(percent):
+    return WINDOW_WIDTH * (percent/100)
+
+def percentHeight(percent):
+    return WINDOW_HEIGHT * (percent/100)
+
+def createRectangle(xStart, yStart, width, height):
+    return Rectangle(Point(xStart, WINDOW_HEIGHT - yStart), Point(xStart + width, WINDOW_HEIGHT - (yStart +  height)))
 
 def createWindow():
-    win = g.GraphWin(WINDOW_CAPTION, WINDOW_WIDTH, WINDOW_HEIGHT)
+    win = GraphWin(WINDOW_CAPTION, WINDOW_WIDTH, WINDOW_HEIGHT)
     win.setBackground(WINDOW_BACKGROUND_DAY)
     return win
 
 def drawGround(win):
-    ground = g.Rectangle(ptFromBottomLeft(0,0), ptFromBottomLeft(WINDOW_WIDTH, GROUND_HEIGHT))
-    ground.setOutline(GROUND_COLOR)
-    ground.setFill(GROUND_COLOR)
-    ground.draw(win)
+    rect = createRectangle(0, 0, percentWidth(100), GROUND_HEIGHT)
+    rect.setFill(GROUND_COLOR)
+    rect.setWidth(0)
+    rect.draw(win)
+    return rect
 
 def drawHouse(win):
-    house = g.Rectangle(HOUSE_BOTTOM_LEFT, HOUSE_TOP_RIGHT)
-    house.setOutline(HOUSE_COLOR)
-    house.setFill(HOUSE_COLOR)
-    house.draw(win)
+    rect = createRectangle((WINDOW_WIDTH - HOUSE_WIDTH)/2, GROUND_HEIGHT, HOUSE_WIDTH, HOUSE_HEIGHT)
+    rect.setFill(HOUSE_COLOR)
+    rect.setWidth(0)
+    rect.draw(win)
+    return rect
 
 def drawRoof(win):
-    roof = g.Polygon(g.Point(0,0), g.Point(HOUSE_WIDTH,0), g.Point(HOUSE_WIDTH/2, -35), g.Point(0,0))
-    roof.setFill(ROOF_COLOR)
-    roof.setOutline(ROOF_COLOR)
-    roof.move((WINDOW_WIDTH / 2) - (HOUSE_WIDTH / 2), HOUSE_TOP_RIGHT.getY())
-    roof.draw(win)
+    print('eh')
 
-def drawSun(win):
-    sun = g.Circle(g.Point(0,0), 50)
-    sun.setFill(g.color_rgb(242, 219, 104))
-    sun.setOutline(g.color_rgb(242, 219, 104))
-    sun.draw(win)
-    return sun
-
-def changeToNightOnClick(win):
+def waitForClick(win):
     win.getMouse()
-    win.setBackground(WINDOW_BACKGROUND_NIGHT)
-    
-def changeSunToMoon(sun):
-    sun.setFill(g.color_rgb(177, 181, 204))
-    sun.setOutline(g.color_rgb(177, 181, 204))
 
 def main():
     win = createWindow()
-    drawGround(win)
-    drawHouse(win)
-    drawRoof(win)
-    sun = drawSun(win)
-    changeToNightOnClick(win)
-    changeSunToMoon(sun)
-    win.getMouse()
+    ground = drawGround(win)
+    house = drawHouse(win)
+    roof = drawRoof(win)
+    waitForClick(win)
 
 main()
-
