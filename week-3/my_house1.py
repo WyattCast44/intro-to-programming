@@ -29,12 +29,13 @@ from graphics import *
 # Window
 WINDOW_WIDTH = 500
 WINDOW_HEIGHT = 300
-WINDOW_CAPTION = "Mars Base 1"
-WINDOW_BACKGROUND_DAY = color_rgb(52, 63, 138)
+WINDOW_CAPTION = "My House"
+WINDOW_BACKGROUND_DAY = color_rgb(237, 235, 218)
+WINDOW_BACKGROUND_NIGHT = color_rgb(52, 63, 138)
 
 # Ground
 GROUND_HEIGHT = 50
-GROUND_COLOR = color_rgb(207, 79, 43)
+GROUND_COLOR = color_rgb(108, 166, 119) 
 
 # House
 HOUSE_WIDTH = 150
@@ -63,11 +64,11 @@ def createWindow():
     return win
 
 def drawGround(win):
-    ground = Circle(Point(percentWidth(50),percentHeight(100)), 300)
+    ground = createRectangle(0, 0, percentWidth(100), GROUND_HEIGHT)
     ground.setFill(GROUND_COLOR)
     ground.setWidth(0)
     ground.draw(win)
-    return ground
+    returkn ground
 
 def drawHouse(win):
     house = createRectangle((WINDOW_WIDTH - HOUSE_WIDTH)/2, GROUND_HEIGHT, HOUSE_WIDTH, HOUSE_HEIGHT)
@@ -101,5 +102,12 @@ def waitForClick(win):
 def main():
     win = createWindow()
     ground = drawGround(win)
+    house = drawHouse(win)
+    roof = drawRoof(win)
+    sun = drawSun(win)
+    writeMessage(win)
+    waitForClick(win)
+    changeSceneToNight(win, sun)
+    waitForClick(win)
 
 main()
