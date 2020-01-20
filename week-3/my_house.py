@@ -114,7 +114,7 @@ def drawLaunchPad(win):
     pad.setWidth(1)
     pad.draw(win)
 
-    rocket1 = Image(Point(percentWidth(68), percentHeight(75)), "rocket25.png")
+    rocket1 = Image(Point(percentWidth(68), percentHeight(75)), "rocket.png")
     rocket1.draw(win)
 
     rocket2 = rocket1.clone()
