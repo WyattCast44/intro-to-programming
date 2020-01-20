@@ -46,6 +46,9 @@ HOUSE_BOTTOM_LEFT = ptFromBottomLeft((WINDOW_WIDTH / 2) - (HOUSE_WIDTH / 2), GRO
 HOUSE_TOP_RIGHT = ptFromBottomLeft((WINDOW_WIDTH / 2) + (HOUSE_WIDTH / 2), GROUND_HEIGHT + HOUSE_HEIGHT)
 HOUSE_COLOR = g.color_rgb(166, 149, 108)
 
+# Roof
+ROOF_COLOR = g.color_rgb(181, 88, 65)
+
 def drawGround(win):
     ground = g.Rectangle(ptFromBottomLeft(0,0), ptFromBottomLeft(WINDOW_WIDTH, GROUND_HEIGHT))
     ground.setOutline(GROUND_COLOR)
@@ -58,10 +61,19 @@ def drawHouse(win):
     house.setFill(HOUSE_COLOR)
     house.draw(win)
 
+def drawRoof(win):
+    roof = g.Polygon(g.Point(0,0), g.Point(175,0), g.Point(87.5, -35), g.Point(0,0))
+    roof.setFill(ROOF_COLOR)
+    roof.setOutline(ROOF_COLOR)
+    roof.move(WINDOW_WIDTH/2, HOUSE_TOP_RIGHT.getY())
+    roof.draw(win)
+
+
 def main():
     win = g.GraphWin(WINDOW_CAPTION, WINDOW_WIDTH, WINDOW_HEIGHT)
     drawGround(win)
     drawHouse(win)
+    drawRoof(win)
     win.getMouse()
 
 main()
