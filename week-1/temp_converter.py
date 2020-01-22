@@ -37,6 +37,7 @@ def convertFahrenheitToCelcius(degFah):
     return ((float(degFah) - 32) * 5)/9
 
 def printConvertedValue(inputFormat, degrees):
+    degrees = round(degrees, 2)
     if inputFormat == "Celcius":
         message = f'The temperature in Fahrenheit is {degrees} degrees'
     else:
@@ -50,7 +51,7 @@ numRepitions = int(input("How many temperatures would you like to convert? Enter
 print()
 
 for rounds in range(numRepitions):
-    inputFormat = "Celcius"
+    inputFormat = "Fahrenheit"
     inputDegrees = promptUserInput(inputFormat)
     if inputFormat == "Celcius":
         printConvertedValue(
