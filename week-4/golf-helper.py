@@ -37,3 +37,37 @@ I recommend using your 9-Iron
 """
 
 # Solution
+
+def isBallOnGreen():
+    print('\nIs the ball currently on the green?\n')
+    print("Enter 'y' for yes...")
+    print("Enter 'n' for no...\n")
+    return input('> ')
+
+def promptUserForDistanceToHole():
+    print('\nHow far is the ball from the hole? (yards)\n')
+    return float(input('> '))
+
+def determineBestClub(distanceToHole):
+    if distanceToHole >= 200:
+        return 'Driver'
+    elif distanceToHole < 200 and distanceToHole >= 140:
+        return '5-Iron'
+    elif distanceToHole < 140 and distanceToHole >= 100:
+        return '9-Iron'
+    else:
+        return 'Pitching Wedge'
+
+def main():
+    print('\nWelcome to the Golf Club Helper! ⛳')
+    print('Tell me your situation, and I\'ll recommend a club.\n')
+
+    if isBallOnGreen() == 'y':
+        print('\nI recommend using the Putter. 🏌️')
+        return
+
+    distance = promptUserForDistanceToHole()
+    club = determineBestClub(distance)
+    print(f'\nI recommend using your {club} 🏌️')
+
+main()
