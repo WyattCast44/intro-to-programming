@@ -56,7 +56,18 @@ searchMethods = {
     "l": "last name",
 }
 
-spacer = '\x20\x20\x20\x20\x20'
+spacer = '\x20\x20\x20\x20\x20' 
+tableHeader = f'\nID{spacer}First Name{spacer}Last Name{spacer}Part Number{spacer}Quantity{spacer}Total\n'
+tableHeader = tableHeader + '---------------------------------------------------------------------------------'
+tableFooter = '---------------------------------------------------------------------------------'
+tableHeaderPositions = {
+    'ID': tableHeader.find('ID'),
+    'firstName': tableHeader.find('First Name'),
+    'lastName': tableHeader.find('Last Name'),
+    'partNumber': tableHeader.find('Part Number'),
+    'quantity': tableHeader.find('Quantity'),
+    'total': tableHeader.find('Total'),
+}
 
 def welcome():
     print('\nMaster Sales Program - v0.1.0')
@@ -101,23 +112,7 @@ def searchSales(term, sales, contents):
     return matches
 
 def printResultsHeader():
-    header = f'\nID{spacer}First Name{spacer}Last Name{spacer}Part Number{spacer}Quantity{spacer}Total\n'
-    header = header + '---------------------------------------------------------------------------------'
-
-    headerParams = {
-        'ID': header.find('ID'),
-        'firstName': header.find('First Name'),
-        'lastName': header.find('Last Name'),
-        'partNumber': header.find('Part Number'),
-        'quantity': header.find('Quantity'),
-        'total': header.find('Total'),
-    }
-
-    print(headerParams)
-
-    quit()
-
-    print(header)
+    print(tableHeader)
 
 def printResults(results):
     if len(results) == 0:
