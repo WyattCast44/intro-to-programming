@@ -96,11 +96,20 @@ def getSalesData():
     next(fileObj)
     return fileObj.readlines()
 
-def searchSales(term, contents):
+def searchSales(term, method, contents):
+
+    if method == 'f':
+        method = 'First Name'
+    elif method == 'l':
+        method = 'Last Name'
+    else:
+        method = 'ID'
+
     matches = []
 
     for line in contents:
-        if term in line:
+        parts = line.split(',')
+        if term in parts[tableHeaders.index(method)]:
             matches.append(line)
         
     return matches
@@ -111,7 +120,7 @@ def main():
     method = promptForSearchMethod()
     term = promptForSearchTerm(method)
     sales = getSalesData()
-    results = searchSales(term, sales)
+    results = searchSales(term, method, sales)
 
     printTable(tableHeaders, results)
 
