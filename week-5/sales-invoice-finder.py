@@ -50,33 +50,29 @@ Enter your search term: Maryville
 
 # Solution
 
+from helpers import *
+
 searchMethods = {
     "i": "invoice ID",
     "f": "first name",
     "l": "last name",
 }
 
-spacer = '\x20\x20\x20\x20\x20' 
-tableHeader = f'\nID{spacer}First Name{spacer}Last Name{spacer}Part Number{spacer}Quantity{spacer}Total\n'
-tableHeader = tableHeader + '---------------------------------------------------------------------------------'
-tableFooter = '---------------------------------------------------------------------------------'
-tableHeaderPositions = {
-    'ID': tableHeader.find('ID'),
-    'firstName': tableHeader.find('First Name'),
-    'lastName': tableHeader.find('Last Name'),
-    'partNumber': tableHeader.find('Part Number'),
-    'quantity': tableHeader.find('Quantity'),
-    'total': tableHeader.find('Total'),
-}
-
-def welcome():
-    print('\nMaster Sales Program - v0.1.0')
+tableHeaders = [
+    'ID',
+    'First Name',
+    'Last Name',
+    'Part Number',
+    'Quantity',
+    'Total'
+]
 
 def printSearchMethods():
-    print('\nHow would you like to search?')
-    print('-------------------------------')
+    print('\nHow would you like to search?\n-------------------------------')
+
     for key, term in searchMethods.items():
         print(f"- Enter '{key}' to search by {term}...")
+        
     print('')
 
 def promptForSearchMethod():
@@ -92,17 +88,15 @@ def promptForSearchMethod():
     return method
 
 def promptForSearchTerm(method):
-    print(f'\nEnter your search term: ({searchMethods[method]})')
-    print('-------------------------------')
+    print(f'\nEnter your search term: ({searchMethods[method]})\n-------------------------------')
     return input('> ')
 
-def openSalesData():
-    return open('sales_data.csv')
-
-def getSalesContents(fileObj):
+def getSalesData():
+    fileObj = open('sales_data.csv')
+    next(fileObj)
     return fileObj.readlines()
 
-def searchSales(term, sales, contents):
+def searchSales(term, contents):
     matches = []
 
     for line in contents:
@@ -111,32 +105,14 @@ def searchSales(term, sales, contents):
         
     return matches
 
-def printResultsHeader():
-    print(tableHeader)
-
-def printResults(results):
-    if len(results) == 0:
-        print('\nNo results found!\n')
-        return
-
-    printResultsHeader()
-
-    currentLine = ''
-
-    for line in results:
-        parts = line.split(',')
-        for part in parts:
-            currentLine = currentLine + f'{part}{spacer}'
-        print(currentLine)
-
 def main():
+    print('\nMaster Sales Program - v0.1.0')
+    
     method = promptForSearchMethod()
     term = promptForSearchTerm(method)
-    sales = openSalesData()
-    contents = getSalesContents(sales)
-    sales.close()
-    results = searchSales(term, sales, contents)
-    printResults(results)
+    sales = getSalesData()
+    results = searchSales(term, sales)
 
-welcome()
+    printTable(tableHeaders, results)
+
 main()
