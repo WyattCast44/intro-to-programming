@@ -1,7 +1,7 @@
 # Header
 
 """
-Week 4 Review - Part 2
+Week 5 Review - Part 2
 Wyatt Castaneda
 SWDV 600: INTRO TO PROGRAMMING
 """
@@ -49,3 +49,63 @@ Enter your search term: Maryville
 """
 
 # Solution
+
+searchMethods = {
+    "i": "invoice ID",
+    "f": "first name",
+    "l": "last name",
+}
+
+
+def welcome():
+    print('\nMaster Sales Program - v0.1.0')
+
+def printSearchMethods():
+    print('\nHow would you like to search?')
+    print('-------------------------------')
+    for key, term in searchMethods.items():
+        print(f"- Enter '{key}' to search by {term}...")
+    print('')
+
+def promptForSearchMethod():
+    printSearchMethods()
+
+    method = input('> ')
+
+    while not method in searchMethods:
+        print(f"\nUnknown search method '{method}', please try again.")
+        printSearchMethods()
+        method = input('> ')
+
+    return method
+
+def promptForSearchTerm(method):
+    print(f'\nEnter your search term: ({searchMethods[method]})')
+    print('-------------------------------')
+    return input('> ')
+
+def openSalesData():
+    return open('sales_data.csv')
+
+def getSalesContents(fileObj):
+    return fileObj.readlines()
+
+def searchSales(term, sales, contents):
+    matches = []
+    for line in contents:
+        if term in line:
+            matches.append(line)
+
+    print()
+    print(matches)
+
+def main():
+    method = promptForSearchMethod()
+    term = promptForSearchTerm(method)
+    sales = openSalesData()
+    contents = getSalesContents(sales)
+    matches = searchSales(term, sales, contents)
+    sales.close()
+
+welcome()
+main()
