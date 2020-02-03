@@ -56,6 +56,7 @@ searchMethods = {
     "l": "last name",
 }
 
+spacer = '\x20\x20\x20\x20\x20'
 
 def welcome():
     print('\nMaster Sales Program - v0.1.0')
@@ -92,20 +93,55 @@ def getSalesContents(fileObj):
 
 def searchSales(term, sales, contents):
     matches = []
+
     for line in contents:
         if term in line:
             matches.append(line)
+        
+    return matches
 
-    print()
-    print(matches)
+def printResultsHeader():
+    header = f'\nID{spacer}First Name{spacer}Last Name{spacer}Part Number{spacer}Quantity{spacer}Total\n'
+    header = header + '---------------------------------------------------------------------------------'
+
+    headerParams = {
+        'ID': header.find('ID'),
+        'firstName': header.find('First Name'),
+        'lastName': header.find('Last Name'),
+        'partNumber': header.find('Part Number'),
+        'quantity': header.find('Quantity'),
+        'total': header.find('Total'),
+    }
+
+    print(headerParams)
+
+    quit()
+
+    print(header)
+
+def printResults(results):
+    if len(results) == 0:
+        print('\nNo results found!\n')
+        return
+
+    printResultsHeader()
+
+    currentLine = ''
+
+    for line in results:
+        parts = line.split(',')
+        for part in parts:
+            currentLine = currentLine + f'{part}{spacer}'
+        print(currentLine)
 
 def main():
     method = promptForSearchMethod()
     term = promptForSearchTerm(method)
     sales = openSalesData()
     contents = getSalesContents(sales)
-    matches = searchSales(term, sales, contents)
     sales.close()
+    results = searchSales(term, sales, contents)
+    printResults(results)
 
 welcome()
 main()
