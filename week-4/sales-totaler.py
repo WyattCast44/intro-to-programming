@@ -34,6 +34,7 @@ Done writing totals to 17-oct-total.txt
 from helpers import *
 
 tableRows = []
+tableRowsFormatted = []
 tableHeaders = []
 numberOfSalesHeaders = 2
 
@@ -59,7 +60,7 @@ def main():
         # Count how many sales this row contains
         salesCount = len(sales)
 
-        # Make sure the headers count is updated
+        # Make sure the sales headers count is updated
         if salesCount > numberOfSalesHeaders:
             numberOfSalesHeaders = salesCount
 
@@ -67,7 +68,7 @@ def main():
         salesAmounts = [float(sale.replace('$', '')) for sale in sales] 
 
         # Determine the row total
-        rowTotal = sum(salesAmounts)
+        rowTotal = round(sum(salesAmounts), 2)
 
         # Append total to row
         salesAmounts.append(rowTotal)
@@ -77,8 +78,33 @@ def main():
 
         # Append these rows to the table rows
         tableRows.append(salesFormatted)
+
+        ## TODO: Make sure that totals row is always pushed to the furthest end
     
+    # Pad each row so that the totals column is always the last column
+    for row in tableRows:
+        
+        # Split row into items
+        sales = row.split(',')
+
+        # Remove the total column
+        total = sales.pop()
+
+        # Determine the number of sales in row
+        salesCount = len(sales)
+
+        if salesCount < numberOfSalesHeaders:
+            # Append empty spaces to row
+            for index in range(numberOfSalesHeaders - salesCount):
+                sales.append('')
+        
+        sales.append(total)
+
+        salesFormatted = ','.join([sale for sale in sales])
+
+        tableRowsFormatted.append(salesFormatted)
+
     buildTableHeaders()
-    printTable(tableHeaders, tableRows)
+    printTable(tableHeaders, tableRowsFormatted)
 
 main()

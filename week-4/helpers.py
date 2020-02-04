@@ -82,3 +82,7 @@ def formatRows(rows, headerPositions):
         lines.append(currentLine)
 
     return lines
+
+def dd(payload):
+    print(payload)
+    quit()
