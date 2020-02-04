@@ -30,3 +30,64 @@ HINT: If you find yourself devising an elaborate algorithm involving programming
 """
 
 # Solution
+
+from helpers import *
+
+template = """
+The wheels on the [VEHICLE] go round and round
+Round and round
+Round and round
+The wheels on the [VEHICLE] go round and round
+All through [PLACE]
+
+The wipers on the [VEHICLE] go Swish, swish, swish
+Swish, swish, swish
+Swish, swish, swish
+The wipers on the [VEHICLE] go Swish, swish, swish
+All through [PLACE]
+
+[NAME] on the [VEHICLE] says "[GREETING], [GREETING], [GREETING]
+[GREETING], [GREETING], [GREETING]
+[GREETING], [GREETING], [GREETING]"
+[NAME] on the [VEHICLE] says "[GREETING], [GREETING], [GREETING]"
+All through the [PLACE]
+
+The doors on the [VEHICLE] go open and shut
+Open and shut
+Open and shut
+The doors on the [VEHICLE] go open and shut
+All through [PLACE]
+"""
+
+def main():
+    # Welcome
+    print(success('\nMadLib Maker 1000 - v0.1.0'))
+    print(success('----------------------------'))
+    print(info('- Give me a couple of words and I\'ll give you a MadLib\n\n'))
+    
+    # Name
+    print('Let\'s start with a name:')
+    name = bold(input('> '))
+
+    # Place
+    print(f'\nOkay {name}, how about a place?')
+    place = bold(input('> '))
+
+    # Vehicle
+    print('\nQuick think a vehicle, something with wheels!')
+    vehicle = bold(input('> '))
+
+    # Greeting
+    print('\nAlright last one... we need a greeting:')
+    greeting = bold(input('> '))
+
+    # Print Result
+    print(success('\nHere you go!'))
+    print(success('------------------------------------------'))
+
+    print(template.replace('[NAME]', name).replace('[PLACE]', place).replace('[VEHICLE]', vehicle).replace('[GREETING]', greeting))
+
+    print(success('------------------------------------------'))
+    print(success('Thanks for playing!'))
+
+main()
