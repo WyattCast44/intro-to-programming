@@ -140,11 +140,13 @@ def main():
         
         sales.append(total)
 
+        # 
         salesFormatted = ','.join([sale for sale in sales])
 
         tableRowsFormatted.append(salesFormatted)
 
     buildTableHeaders()
+
     table = buildTable(tableHeaders, tableRowsFormatted)
 
     output = open(outputFile, 'w')
