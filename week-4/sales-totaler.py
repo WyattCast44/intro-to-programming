@@ -30,3 +30,16 @@ Done writing totals to 17-oct-total.txt
 """
 
 # Solution
+
+from helpers import *
+
+tableHeaders = [
+    "Sale [NUMBER]",
+    "Total"
+]
+
+def main():
+    sales = open('17-oct-sales.txt').readlines().close()
+    print(sales)
+
+main()
