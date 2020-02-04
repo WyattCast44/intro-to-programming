@@ -28,20 +28,22 @@ def underlined(message):
 def spaces(num):
     return ('\x20' * num)
 
-def printTable(headers, rows):
+def buildTable(headers, rows):
     header = formatTableHeader(headers)
     border = formatHeaderBorder(header)
     headerPositions = determineHeaderPositions(headers, header)
     lines = formatRows(rows, headerPositions)
 
-    print(f'\n{header}\n{border}')
+    table = f'{header}\n{border}\n'
 
     for line in lines:
-        print(line)
+        table = table + line + '\n'
     
-    print(border)
+    table = table + border
 
-    print(f'Count: {len(lines)}')
+    table = table + f'\nRows Count: {len(lines)}'
+
+    return table
 
 
 def formatTableHeader(headers):

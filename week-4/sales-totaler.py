@@ -33,8 +33,6 @@ Done writing totals to 17-oct-total.txt
 
 from helpers import *
 
-dd('hello', 'wyatt')
-
 tableRows = []
 tableHeaders = []
 tableRowsFormatted = []
@@ -60,6 +58,8 @@ def ensureFileDoesntExist(path):
             quit()
             
     except IOError:
+        fileObj = open(path, 'w')
+        fileObj.close()
         print()
 
 def getSalesData(path):
@@ -145,6 +145,12 @@ def main():
         tableRowsFormatted.append(salesFormatted)
 
     buildTableHeaders()
-    printTable(tableHeaders, tableRowsFormatted)
+    table = buildTable(tableHeaders, tableRowsFormatted)
+
+    output = open(outputFile, 'w')
+    output.write(table)
+    output.close()
+
+    print(success(f'\nDone writing totals to {outputFile}!'))
 
 main()
