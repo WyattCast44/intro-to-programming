@@ -33,13 +33,52 @@ Done writing totals to 17-oct-total.txt
 
 from helpers import *
 
-tableHeaders = [
-    "Sale [NUMBER]",
-    "Total"
-]
+tableRows = []
+tableHeaders = []
+numberOfSalesHeaders = 2
+
+def buildTableHeaders():
+    for index in range(numberOfSalesHeaders):
+        tableHeaders.append(f'Sale #{index + 1}')
+    tableHeaders.append('Total')
 
 def main():
-    sales = open('17-oct-sales.txt').readlines().close()
-    print(sales)
+    global numberOfSalesHeaders
+
+    # Get the sales data
+    data = open('17-oct-sales.txt')
+    rows = data.readlines()
+    data.close()
+    
+    # Parse the data
+    for row in rows:
+
+        # Split up the row into sales
+        sales = row.split(' ')
+
+        # Count how many sales this row contains
+        salesCount = len(sales)
+
+        # Make sure the headers count is updated
+        if salesCount > numberOfSalesHeaders:
+            numberOfSalesHeaders = salesCount
+
+        # Convert row currency strings into sumable floats
+        salesAmounts = [float(sale.replace('$', '')) for sale in sales] 
+
+        # Determine the row total
+        rowTotal = sum(salesAmounts)
+
+        # Append total to row
+        salesAmounts.append(rowTotal)
+
+        # Format back into strings with currency and join all columns by ','
+        salesFormatted = ','.join([f'${sale}' for sale in salesAmounts])
+
+        # Append these rows to the table rows
+        tableRows.append(salesFormatted)
+    
+    buildTableHeaders()
+    printTable(tableHeaders, tableRows)
 
 main()
