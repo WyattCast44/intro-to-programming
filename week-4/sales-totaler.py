@@ -33,11 +33,41 @@ Done writing totals to 17-oct-total.txt
 
 from helpers import *
 
-tableRows = []
-tableRowsFormatted = []
-tableHeaders = []
-numberOfSalesHeaders = 2
+dd('hello', 'wyatt')
 
+tableRows = []
+tableHeaders = []
+tableRowsFormatted = []
+numberOfSalesHeaders = 1
+
+def ensureFileExists(path):
+    try:
+        fileObj = open(path)
+        fileObj.close()
+    except IOError:
+        print(error(bold('\nThe input file cannot be found, please check spelling!')))
+        quit()
+
+def ensureFileDoesntExist(path):
+    try:
+        fileObj = open(path)
+        fileObj.close()
+        print(error(bold('\nThe output file already exists, do you want to continue?\n')))
+        print(info("- Enter 'y' to overwrite the file"))
+        print(info("- Enter 'n' to cancel\n"))
+
+        if input('> ') == 'n':
+            quit()
+            
+    except IOError:
+        print()
+
+def getSalesData(path):
+    data = open(path)
+    rows = data.readlines()
+    data.close()
+    return rows
+    
 def buildTableHeaders():
     for index in range(numberOfSalesHeaders):
         tableHeaders.append(f'Sale #{index + 1}')
@@ -46,10 +76,22 @@ def buildTableHeaders():
 def main():
     global numberOfSalesHeaders
 
+    # Welcome
+    print(success('\nSales Ledger Totaler - v0.1.0'))
+    print(success('--------------------------------'))
+    
+    # Get the input file name
+    print(info('- Please enter the name of the sales file you would like to total:\n'))
+    inputFile = input('> ')
+    ensureFileExists(inputFile)
+
+    # Get the name for the output file
+    print(info('\n- Please enter the name for the output file:\n'))
+    outputFile = input('> ')
+    ensureFileDoesntExist(outputFile)
+
     # Get the sales data
-    data = open('17-oct-sales.txt')
-    rows = data.readlines()
-    data.close()
+    rows = getSalesData(inputFile)
     
     # Parse the data
     for row in rows:
@@ -78,8 +120,6 @@ def main():
 
         # Append these rows to the table rows
         tableRows.append(salesFormatted)
-
-        ## TODO: Make sure that totals row is always pushed to the furthest end
     
     # Pad each row so that the totals column is always the last column
     for row in tableRows:

@@ -109,7 +109,7 @@ def searchSales(term, method, contents):
 
     for line in contents:
         parts = line.split(',')
-        if term in parts[tableHeaders.index(method)]:
+        if term.lower() in parts[tableHeaders.index(method)].lower():
             matches.append(line)
         
     return matches

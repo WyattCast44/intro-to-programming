@@ -83,6 +83,7 @@ def formatRows(rows, headerPositions):
 
     return lines
 
-def dd(payload):
-    print(payload)
+def dd(*payloads):
+    for payload in list(payloads):
+        print(payload)
     quit()
