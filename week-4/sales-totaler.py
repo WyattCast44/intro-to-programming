@@ -43,7 +43,7 @@ def ensureFileExists(path):
         fileObj = open(path)
         fileObj.close()
     except IOError:
-        print(error(bold('\nThe input file cannot be found, please check spelling!')))
+        print(error(bold('\nThe input file cannot be found, please check the spelling!')))
         quit()
 
 def ensureFileDoesntExist(path):
@@ -71,7 +71,7 @@ def getSalesData(path):
 def buildTableHeaders():
     for index in range(numberOfSalesHeaders):
         tableHeaders.append(f'Sale #{index + 1}')
-    tableHeaders.append('Total')
+    tableHeaders.append('Row Total')
 
 def main():
     global numberOfSalesHeaders
