@@ -36,26 +36,24 @@ from helpers import *
 template = """
 The wheels on the [VEHICLE] go round and round
 Round and round
-Round and round
 The wheels on the [VEHICLE] go round and round
+Round and round
 All through [PLACE]
 
 The wipers on the [VEHICLE] go Swish, swish, swish
 Swish, swish, swish
-Swish, swish, swish
 The wipers on the [VEHICLE] go Swish, swish, swish
+Swish, swish, swish
 All through [PLACE]
 
-[NAME] on the [VEHICLE] says "[GREETING], [GREETING], [GREETING]
-[GREETING], [GREETING], [GREETING]
-[GREETING], [GREETING], [GREETING]"
-[NAME] on the [VEHICLE] says "[GREETING], [GREETING], [GREETING]"
-All through the [PLACE]
+[NAME] in the [VEHICLE] says "[GREETING], [GREETING], [GREETING]",
+[NAME] in the [VEHICLE] says "[GREETING], [GREETING], [GREETING]"
+All through [PLACE]
 
-The doors on the [VEHICLE] go open and shut
-Open and shut
-Open and shut
-The doors on the [VEHICLE] go open and shut
+The doors on the [VEHICLE] go open and close
+Open and close
+The doors on the [VEHICLE] go open and close
+Open and close
 All through [PLACE]
 """
 
