@@ -38,6 +38,8 @@ I recommend using your 9-Iron
 
 # Solution
 
+from helpers import *
+
 def isBallOnGreen():
     print('\nIs the ball currently on the green?\n')
     print("Enter 'y' for yes...")
@@ -59,8 +61,9 @@ def determineBestClub(distanceToHole):
         return 'Pitching Wedge'
 
 def main():
-    print('\nWelcome to the Golf Club Helper! ⛳')
-    print('Tell me your situation, and I\'ll recommend a club.\n')
+    print(success('\nWelcome to the Golf Club Helper! ⛳'))
+    print(success('---------------------------------------------------'))
+    print(info('Tell me your situation, and I\'ll recommend a club.\n'))
 
     if isBallOnGreen() == 'y':
         print('\nI recommend using the Putter. 🏌️')
