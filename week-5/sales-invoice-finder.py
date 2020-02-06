@@ -68,7 +68,7 @@ tableHeaders = [
 ]
 
 def printSearchMethods():
-    print('\nHow would you like to search?\n-------------------------------')
+    print(info('\nHow would you like to search?\n-------------------------------'))
 
     for key, term in searchMethods.items():
         print(f"- Enter '{key}' to search by {term}...")
@@ -88,7 +88,7 @@ def promptForSearchMethod():
     return method
 
 def promptForSearchTerm(method):
-    print(f'\nEnter your search term: ({searchMethods[method]})\n-------------------------------')
+    print(info(f'\nEnter your search term: ({searchMethods[method]})\n-------------------------------'))
     return input('> ')
 
 def getSalesData():
@@ -115,7 +115,8 @@ def searchSales(term, method, contents):
     return matches
 
 def main():
-    print('\nMaster Sales Program - v0.1.0')
+    print(success('\nMaster Sales Program - v0.1.0'))
+    print(success('----------------------------------'))
     
     method = promptForSearchMethod()
     term = promptForSearchTerm(method)
