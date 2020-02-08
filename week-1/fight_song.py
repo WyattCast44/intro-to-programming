@@ -56,7 +56,7 @@ def printSongLines(*lines):
 def sing_fight_song():
 
     # Solution 1
-    print(song)
+    # print(song)
 
     # Solution 2
     printSongLines(
