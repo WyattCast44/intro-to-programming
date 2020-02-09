@@ -1,9 +1,12 @@
 class Console:
+    
+    output = ''
 
-    fluent = False
     message = ''
 
-    formats = {
+    formatters = []
+
+    decorators = {
         'darkcyan': '\033[36m',
         'purple': '\033[95m',
         'yellow': '\033[93m',
@@ -15,73 +18,50 @@ class Console:
         'end': '\033[0m'
     }
 
-    def format(self, message = ''):
+    def print(self, message = ''):
+
+        if message != '':
+            self.message = message
+
+        print(self.getFormattedOutput())
+
+    def message(self, message):
         self.message = message
-        self.fluent = True
+        
+        return self
+
+    def bold(self):
+        self.formatters.append('bold')
+
+        return self
+
+    def getFormattedOutput(self):
+        
+        formatted = self.message
+
+        for formatter in self.formatters:
+            formatted = f'{self.decorators.get(formatter)}{formatted}{self.decorators.get("end")}'
+
+        self.output = f'{formatted}'
+
+        return self.output
+
+    def sectionTitle(self, message):
+
+        self.message = f'{message}\n--------------------------\n'
+
         return self
     
-    def formatLine(self, formats, message):
-
-        if type(formats) == list:
-            formatted = message
-            for index in formats:
-                formatted = f'{self.formats.get(index)}{formatted}{self.formats.get("end")}'
-        else:
-            formatted = f'{self.formats.get(formats)}{message}{self.formats.get("end")}' 
-
-        return f'{formatted}'
-
-    def bold(self, message):
-        
-        message = self.formatLine('bold', message)
-
-        if self.fluent:
-            return message
-        else:
-            print(message)
-
-    def success(self, message):
-
-        message = self.formatLine('green', message)
-
-        if self.fluent:
-            return message
-        else:
-            print(message)
-    
-    def info(self, message):
-
-        message = self.formatLine('yellow', message)
-        
-        if self.fluent:
-            return message
-        else:
-            print(message)
-
-    def error(self, message = ''):
-
-        if message == '':
-            message = self.message
-
-        message = self.formatLine('red', message)
-        
-        if self.fluent:
-            return message
-        else:
-            print(message)
-
-    def line(self, message):
-        
-        if self.fluent:
-            return message
-        else:
-            print(message)
-
-    def __del__(self):
-        if self.fluent:
-            print(self.message)
-    
 def main():
-    Console().format('my message').error()
+    # Valid
+    Console().print('Hello')
+    
+    # Valid
+    Console().message('Hello World').print()
+
+    # Valid
+    Console().bold().print('Bold')
+
+    Console().sectionTitle('Welcome to the Jungle!').print()
 
 main()
