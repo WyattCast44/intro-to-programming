@@ -24,11 +24,11 @@ things as well, but these are required.
 # Standard Libraries
 import sys
 
-# My Libraries
-from src import ConsoleIO
-
 # Other Libraries
 from tinydb import TinyDB, Query
+
+# My Libraries
+import src.ConsoleIO
 
 ConsoleIO().title('\nEscape From Mars! - v0.1.0', ['red', 'bold'])
 ConsoleIO().line('Escape from Mars is a text based adventure game, where you play Mark Watney.')
