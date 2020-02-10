@@ -38,7 +38,7 @@ os.system('cls' if os.name == 'nt' else 'clear')
 db = TinyDB('db.json')
 
 Console().title('\nEscape From Mars! - v0.1.0', 'green')
-Console().line('Escape from Mars is a text based adventure game, where you play Mark Watney, Astronaut.')
+Console().line('Escape from Mars is a text based adventure game, where you play Mark Watney, Astronaut trying to escape Mars and return home.')
 
 Console().sectionWithList('Usage:', [
     f"python {sys.argv[0]} 'command'",
@@ -53,3 +53,5 @@ Console().sectionWithList('Commands:', [
     "Enter 'resume' to resume a saved game",
     "Enter 'new' to start a new game",
 ])
+
+Console().line(f'')
