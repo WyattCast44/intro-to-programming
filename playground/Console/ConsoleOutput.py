@@ -50,14 +50,14 @@ class ConsoleOutput:
 
         print(f'{message}\n{underline}')
 
-    def line(self, message):
+    def line(self, message = ''):
         print(message)
 
-    def sectionWithOptions(self, title, options):
+    def sectionWithList(self, title, options):
         self.title(f'\n{title}')
 
-        for key, info in options.items():
-            self.line(f'- {info}')
+        for option in options:
+            self.line(f'- {option}')
 
     def table(self, headers, rows):
         print('TODO')
