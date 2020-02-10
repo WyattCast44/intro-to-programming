@@ -1,4 +1,4 @@
-import .ConsoleOutput
+from .output import ConsoleOutput
 
 class ConsoleInput(ConsoleOutput):
 

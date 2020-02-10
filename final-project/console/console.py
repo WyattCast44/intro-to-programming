@@ -1,7 +1,7 @@
-import .ConsoleInput
-import .ConsoleOutput
+from .input import ConsoleInput
+from .output import ConsoleOutput
 
-class ConsoleIO(ConsoleInput, ConsoleOutput):
+class Console(ConsoleInput, ConsoleOutput):
     pass
 
     def input(self):
