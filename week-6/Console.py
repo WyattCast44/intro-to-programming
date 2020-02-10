@@ -4,11 +4,8 @@ class Console:
     Console is a helper class to print styled lines in the console
     """
 
-    message = ''
-
-    formatters = []
-
     decorators = {
+        'underlined': '\033[4m',
         'darkcyan': '\033[36m',
         'purple': '\033[95m',
         'yellow': '\033[93m',
@@ -17,24 +14,38 @@ class Console:
         'cyan': '\033[96m',
         'bold': '\033[1m',
         'red': '\033[91m',
-        'end': '\033[0m'
+        'end': '\033[0m',
     }
 
-    def print(self, message = ''):
-
-        if message != '':
-            self.message = message
-
-        print(self.getFormattedOutput())
+    def __init__(self):
+        self.message = ''
+        self.formatters = []
 
     def message(self, message):
         self.message = message
         
         return self
+    
+    def section(self, message):
+        self.message = message
+        self.formatters.append('bold')
+        self.formatters.append('green')
+
+        print(self.getFormattedOutput())
 
     def bold(self):
         self.formatters.append('bold')
 
+        return self
+
+    def success(self):
+        self.formatters.append('green')
+
+        return self
+
+    def underlined(self):
+        self.formatters.append('underlined')
+        
         return self
 
     def getFormattedOutput(self):
@@ -46,14 +57,9 @@ class Console:
 
         return f'{formatted}'
     
-def main():
-    # Valid
-    Console().print('Hello')
-    
-    # Valid
-    Console().message('Hello World').print()
+    def print(self, message = ''):
 
-    # Valid
-    Console().bold().print('Bold')
+        if message != '':
+            self.message = message
 
-main()
+        print(self.getFormattedOutput())
