@@ -23,13 +23,12 @@ things as well, but these are required.
 
 # Standard Libraries
 import os
-import sys
 
 # Other Libraries
 from tinydb import TinyDB, Query
 
 # My Libraries
-from console import Console
+from console import Application
 
 # Clear the terminal
 os.system('cls' if os.name == 'nt' else 'clear')
@@ -37,21 +36,20 @@ os.system('cls' if os.name == 'nt' else 'clear')
 # Init the database
 db = TinyDB('db.json')
 
-Console().title('\nEscape From Mars! - v0.1.0', 'green')
-Console().line('Escape from Mars is a text based adventure game, where you play Mark Watney, Astronaut trying to escape Mars and return home.')
+app = Application()
 
-Console().sectionWithList('Usage:', [
-    f"python {sys.argv[0]} 'command'",
-])
+# Console().title('\nEscape From Mars! - v0.1.0', 'green')
+# Console().line('Escape from Mars is a text based adventure game, where you play Mark Watney, Astronaut.')
 
-Console().sectionWithList('Options:', [
-    "Enter 'h' for application help",
-    "Enter 'v' for version",
-])
+# Console().sectionWithList('Usage:', [
+#     f"python {sys.argv[0]} 'option'",
+# ])
 
-Console().sectionWithList('Commands:', [
-    "Enter 'resume' to resume a saved game",
-    "Enter 'new' to start a new game",
-])
+# Console().sectionWithList('Options:', [
+#     "Pass 'h' for application help",
+# ])
 
-Console().line(f'')
+# Console().sectionWithList('Commands:', [
+#     "Enter 'resume' to resume a saved game",
+#     "Enter 'new' to start a new game",
+# ])
