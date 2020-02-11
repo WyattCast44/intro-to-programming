@@ -61,12 +61,12 @@ class Application(Console):
     def runOption(self, option):
 
         if option in self.options:
-            self.options[option]().handle()
+            self.options[option](self).handle()
 
     def runCommand(self, command):
 
         if command in self.commands:
-            self.commands[command]().handle()
+            self.commands[command](self).handle()
 
     def printMainMenu(self):
     
