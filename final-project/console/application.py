@@ -20,6 +20,9 @@ class Application(Console):
         # Remove the file name
         sys.argv.pop(0)
 
+        # Tmp storage of unknown options
+        unknownOptions = []
+
         # Process the passed args
         for option in sys.argv:
 
@@ -32,9 +35,10 @@ class Application(Console):
             else:
 
                 # Option does not exists, or was not registed
-                Console().sectionWithList('Problems:', [
-                    f'Uknown option {option}'
-                ])
+                unknownOptions.append(f'Uknown option {option}')
+
+        if len(unknownOptions) > 0:
+            Console().sectionWithList('Problems:', unknownOptions)
     
     def registerOptions(self, options):
 

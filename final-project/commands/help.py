@@ -5,4 +5,4 @@ class Help:
     }
 
     def handle(self):
-        print('Running the help command')
+        print('\nRunning the help command')
