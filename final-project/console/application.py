@@ -59,6 +59,11 @@ class Application(Console):
         if option in self.options:
             self.options[option]().handle()
 
+    def runCommand(self, command):
+
+        if command in self.commands:
+            self.commands[command]().handle()
+
     def run(self):
 
         # Check if any args were passed
