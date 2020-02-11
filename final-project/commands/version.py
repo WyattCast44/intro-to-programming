@@ -2,8 +2,6 @@ from console import Console
 
 class Version(Console):
 
-    description = 'Display the application version'
-    
     signature = {
         'v': 'Display the application version'
     }

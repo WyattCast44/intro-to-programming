@@ -1,8 +1,6 @@
 from console import Console
 
 class Help(Console):
-
-    description = 'Display the application help screen'
     
     signature = {
         'h': 'Display the application help screen'

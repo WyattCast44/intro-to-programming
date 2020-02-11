@@ -94,7 +94,7 @@ class Application(Console):
         options = []
 
         for key, option in self.options.items():
-            options.append(f"{option(self).signature[key]}")
+            options.append(Console().formatLine('green', key) +  f" {option(self).signature[key]}")
 
         # Print options section
         Console().sectionWithList('Options:', options)
