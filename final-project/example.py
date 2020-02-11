@@ -2,7 +2,7 @@
 from console import Application
 
 # Commands
-from commands import Help
+from commands import Help, Version
 
 app = Application({
     'name': 'Invoice Calculator',
@@ -11,7 +11,8 @@ app = Application({
 })
 
 app.registerOptions({
-    'h': Help
+    'h': Help,
+    'v': Version,
 }).registerCommands({
     'new': 'Record a new sale',
     'export': 'Export all sales to a csv',
