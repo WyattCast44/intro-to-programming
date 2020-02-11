@@ -4,7 +4,7 @@ from console import Console
 
 class Application(Console):
     
-    config = []
+    config = {}
 
     options = {}
 
@@ -41,18 +41,18 @@ class Application(Console):
         if type(options) == dict:
             for key, desc in options.items():
                 self.options[key] = desc
-            return
+            return self
         else:
-            return
+            return self
 
     def registerCommands(self, commands):
         
         if type(commands) == dict:
             for key, desc in commands.items():
                 self.commands[key] = desc
-            return
+            return self
         else:
-            return
+            return self
 
     def runOption(self, option):
 
@@ -64,6 +64,30 @@ class Application(Console):
         if command in self.commands:
             self.commands[command]().handle()
 
+    def printMainMenu(self):
+    
+        # Print name and version
+        Console().title(f'\n{self.config["name"]} - v{self.config["version"]}', 'green')
+
+        # Print description
+        Console().line(self.config["description"])
+
+        # Print usage section
+        Console().sectionWithList('Usage:', [
+            f"python {sys.argv[0]} [option]",
+        ])
+
+        # Print options section
+        Console().sectionWithList('Options:', [
+            "Pass 'h' for application help",
+        ])
+
+        # Print commands section
+        Console().sectionWithList('Commands:', [
+            "Enter 'resume' to resume a saved game",
+            "Enter 'new' to start a new game",
+        ])
+
     def run(self):
 
         # Check if any args were passed
@@ -73,3 +97,5 @@ class Application(Console):
             self.processOptions()
 
             quit()
+
+        self.printMainMenu()

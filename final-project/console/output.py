@@ -38,15 +38,8 @@ class ConsoleOutput:
 
         if formats != []:
             message = self.formatLine(formats, message)
-        
-        length = len(message)
 
-        underline = ''
-
-        for index in range(length):
-            underline = underline + '-'
-
-        underline = self.formatLine(formats, underline)
+        underline = self.formatLine(formats, ('-' * len(message)))
 
         print(f'{message}\n{underline}')
 

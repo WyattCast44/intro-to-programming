@@ -37,7 +37,11 @@ from commands import Help
 # Init the database
 db = TinyDB('db.json')
 
-app = Application()
+app = Application({
+    'name': 'Escape From Mars!',
+    'version': '0.1.0',
+    'description': 'Escape from Mars is a text based adventure game, where you play Mark Watney, Astronaut.'
+})
 
 app.registerOptions({
     'h': Help
@@ -48,19 +52,3 @@ app.registerCommands({
 })
 
 app.run()
-
-# Console().title('\nEscape From Mars! - v0.1.0', 'green')
-# Console().line('Escape from Mars is a text based adventure game, where you play Mark Watney, Astronaut.')
-
-# Console().sectionWithList('Usage:', [
-#     f"python {sys.argv[0]} 'option'",
-# ])
-
-# Console().sectionWithList('Options:', [
-#     "Pass 'h' for application help",
-# ])
-
-# Console().sectionWithList('Commands:', [
-#     "Enter 'resume' to resume a saved game",
-#     "Enter 'new' to start a new game",
-# ])
