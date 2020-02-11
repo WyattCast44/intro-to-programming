@@ -81,6 +81,8 @@ class Application(Console):
             f"python {sys.argv[0]} [option]",
         ])
 
+        self.printOptions()
+
         # Print commands section
         Console().sectionWithList('Commands:', [
             "Enter 'resume' to resume a saved game",
@@ -92,12 +94,10 @@ class Application(Console):
         options = []
 
         for key, option in self.options.items():
-            options.append(f"Press '{key}' for {option(self).description}")
+            options.append(f"{option(self).signature[key]}")
 
         # Print options section
-        Console().sectionWithList('Options:', [
-            f"Pass 'h' for application help",
-        ])
+        Console().sectionWithList('Options:', options)
 
     def run(self):
 
