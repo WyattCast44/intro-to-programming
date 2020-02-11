@@ -23,20 +23,31 @@ things as well, but these are required.
 
 # Standard Libraries
 import os
+import sys
 
 # Other Libraries
 from tinydb import TinyDB, Query
 
 # My Libraries
-from console import Application
+from console import Application, Console
 
-# Clear the terminal
-os.system('cls' if os.name == 'nt' else 'clear')
+# Commands
+from commands import Help
 
 # Init the database
 db = TinyDB('db.json')
 
 app = Application()
+
+app.registerOptions({
+    'h': Help
+})
+
+app.registerCommands({
+    'h': Help
+})
+
+app.run()
 
 # Console().title('\nEscape From Mars! - v0.1.0', 'green')
 # Console().line('Escape from Mars is a text based adventure game, where you play Mark Watney, Astronaut.')
