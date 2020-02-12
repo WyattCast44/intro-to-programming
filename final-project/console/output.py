@@ -1,3 +1,5 @@
+import sys, time
+
 class ConsoleOutput:
 
     formatters = {
@@ -54,3 +56,9 @@ class ConsoleOutput:
 
     def table(self, headers, rows):
         print('TODO')
+    
+    def typed(self, message, delay=0.1):
+        for letter in message:
+            time.sleep(delay)
+            sys.stdout.write(letter)
+            sys.stdout.flush()

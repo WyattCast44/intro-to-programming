@@ -88,7 +88,7 @@ class Application(Console):
             "Enter 'resume' to resume a saved game",
             "Enter 'new' to start a new game",
         ])
-    
+
     def printOptions(self):
 
         options = []
