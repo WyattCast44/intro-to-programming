@@ -32,7 +32,7 @@ from tinydb import TinyDB, Query
 from console import Application, Console
 
 # Commands
-from commands import Help
+from options import Help
 
 # Init the database
 db = TinyDB('db.json')
@@ -43,9 +43,9 @@ app = Application({
     'description': 'Escape from Mars is a text based adventure game, where you play Mark Watney, Astronaut.'
 })
 
-app.registerOptions({
-    'h': Help
-})
+app.registerOptions([
+    Help,
+])
 
 app.registerCommands({
     'h': Help

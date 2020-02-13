@@ -24,3 +24,15 @@ pip install tinydb
 - You're name is Mark Watney and you the only human on Mars. 
 - Your mission is to cross Schiaparelli and 
 
+# Console Component
+
+## Creating your first CLI App
+
+```python
+from console import Application
+
+app = Application()
+
+app.run()
+```
+
