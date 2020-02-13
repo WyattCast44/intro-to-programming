@@ -61,9 +61,9 @@ class Application():
 
     def registerCommands(self, commands):
 
-        if type(commands) == dict:
-            for key, desc in commands.items():
-                self.commands[key] = desc
+        if type(commands) == list:
+            for command in commands:
+                self.commands[command.signature] = command
             return self
         else:
             return self
@@ -95,6 +95,7 @@ class Application():
         self.printOptions()
 
         # Print commands section
+        self.printCommands()
         # self.console().sectionWithList('Commands:', [
         #     "Enter 'resume' to resume a saved game",
         #     "Enter 'new' to start a new game",
@@ -109,6 +110,16 @@ class Application():
 
         # Print options section
         self.console().sectionWithList('Options:', options, '')
+
+    def printCommands(self):
+
+        commands = []
+
+        for key, command in self.commands.items():
+            commands.append(self.console().formatLine('green', command.signature) +  f" {command.description}")
+
+        # Print commands section
+        self.console().sectionWithList('Commands:', commands, '')
 
     def run(self):
 

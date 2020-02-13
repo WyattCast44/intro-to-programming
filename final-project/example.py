@@ -20,7 +20,7 @@ app = Application({
 app.registerOptions([
     Help,
     Version
-]).registerCommands({
-    'new': 'Record a new sale',
-    'export': 'Export all sales to a csv',
-}).run()
+]).registerCommands([
+    MakeView,
+    MakeCommand
+]).run()
