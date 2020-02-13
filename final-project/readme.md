@@ -19,6 +19,8 @@ pip install tinydb
 - Enemy Name:
 - Enemy Resource: 
 
+- https://www.php2python.com/wiki/function.require-once/
+
 ## Storyline
 
 - You're name is Mark Watney and you the only human on Mars. 

@@ -6,7 +6,7 @@ class Application():
     config = {
         'name': 'Console Application',
         'version': '0.1.0',
-        'description': 'Helping you build simple, but powerful, python command line applications!'
+        'description': 'Helping you build simple and powerful, python command line applications!',
     }
 
     options = {}
@@ -81,24 +81,24 @@ class Application():
     def printMainMenu(self):
     
         # Print name and version
-        self.console().title(f'\n{self.config["name"]} - v{self.config["version"]}', 'green')
+        self.console().title(f'\n{self.config["name"]}', 'green')
 
         # Print description
         self.console().line(self.config["description"])
 
         # Print usage section
         self.console().sectionWithList('Usage:', [
-            f"python {sys.argv[0]} [option]",
+            f"python {sys.argv[0]} [command/option]",
         ])
 
         # Print options menu
         self.printOptions()
 
         # Print commands section
-        self.console().sectionWithList('Commands:', [
-            "Enter 'resume' to resume a saved game",
-            "Enter 'new' to start a new game",
-        ])
+        # self.console().sectionWithList('Commands:', [
+        #     "Enter 'resume' to resume a saved game",
+        #     "Enter 'new' to start a new game",
+        # ])
 
     def printOptions(self):
 
