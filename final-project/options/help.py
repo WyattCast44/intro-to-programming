@@ -1,4 +1,5 @@
-from console import Version
+from .version import Version
+from commands import MakeView
 
 class Help:
     
@@ -11,4 +12,5 @@ class Help:
 
     def handle(self):
         Version(self.application).handle()
+        MakeView(self.application).handle()
         self.application.console().line(f'\nRunning the help command')
