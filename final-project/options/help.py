@@ -4,6 +4,9 @@ class Help:
 
     description = 'Display the application help screen'
 
+    def help(self):
+        print(self)
+        
     def __init__(self, application):
         self.application = application
 
