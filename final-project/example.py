@@ -3,9 +3,11 @@ from console import Application
 
 # Options
 from options import Help
+from options import Version
 
 # Commands
-from commands import Version
+from commands import MakeCommand
+from commands import MakeView
 
 app = Application({
     'name': 'Invoice Calculator',
@@ -16,6 +18,8 @@ app = Application({
 app.registerOptions([
     Help,
     Version,
+    MakeView,
+    MakeCommand,
 ]).registerCommands({
     'new': 'Record a new sale',
     'export': 'Export all sales to a csv',
