@@ -5,13 +5,12 @@ from .output import ConsoleOutput
 class Console(ConsoleInput, ConsoleOutput):
     pass
 
+    options = {}
+
     commands = {}
-
-    def input(self):
-        return ConsoleInput()
-
-    def output(self):
-        return ConsoleOutput()
     
-    def registerCommands():
+    def registerCommands(self):
+        return
+    
+    def registerOptions(self):
         return

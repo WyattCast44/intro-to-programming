@@ -2,7 +2,7 @@ import sys
 import inspect
 from console import Console
 
-class Application(Console):
+class Application():
     
     config = {}
 
@@ -14,6 +14,9 @@ class Application(Console):
 
         # Set the application config
         self.config = config
+
+    def console(self):
+        return Console()
 
     def processOptions(self):
         
@@ -38,7 +41,7 @@ class Application(Console):
                 unknownOptions.append(f'Uknown option {option}')
 
         if len(unknownOptions) > 0:
-            Console().sectionWithList('Problems:', unknownOptions)
+            self.console().sectionWithList('Problems:', unknownOptions)
     
     def registerOptions(self, options):
 
@@ -71,20 +74,21 @@ class Application(Console):
     def printMainMenu(self):
     
         # Print name and version
-        Console().title(f'\n{self.config["name"]} - v{self.config["version"]}', 'green')
+        self.console().title(f'\n{self.config["name"]} - v{self.config["version"]}', 'green')
 
         # Print description
-        Console().line(self.config["description"])
+        self.console().line(self.config["description"])
 
         # Print usage section
-        Console().sectionWithList('Usage:', [
+        self.console().sectionWithList('Usage:', [
             f"python {sys.argv[0]} [option]",
         ])
 
+        # Print options menu
         self.printOptions()
 
         # Print commands section
-        Console().sectionWithList('Commands:', [
+        self.console().sectionWithList('Commands:', [
             "Enter 'resume' to resume a saved game",
             "Enter 'new' to start a new game",
         ])
@@ -94,10 +98,10 @@ class Application(Console):
         options = []
 
         for key, option in self.options.items():
-            options.append(Console().formatLine('green', key) +  f" {option(self).signature[key]}")
+            options.append(self.console().formatLine('green', key) +  f" {option(self).signature[key]}")
 
         # Print options section
-        Console().sectionWithList('Options:', options)
+        self.console().sectionWithList('Options:', options)
 
     def run(self):
 
