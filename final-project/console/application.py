@@ -1,19 +1,26 @@
-import sys
-import inspect
+import os, sys, time, inspect
 from console import Console
 
 class Application():
     
-    config = {}
+    config = {
+        'name': 'Console Application',
+        'version': '0.1.0',
+        'description': 'Helping you build simple, but powerful, python command line applications!'
+    }
 
     options = {}
 
     commands = {}
 
-    def __init__(self, config = []):
+    def __init__(self, config = {}):
 
-        # Set the application config
-        self.config = config
+        # Update the application default config
+        self.config.update(config)
+
+        # Set some config values
+        self.config["cwd"] = os.getcwd()
+        self.config['start'] = time.time()
 
     def console(self):
         return Console()
@@ -45,15 +52,15 @@ class Application():
     
     def registerOptions(self, options):
 
-        if type(options) == dict:
-            for key, desc in options.items():
-                self.options[key] = desc
+        if type(options) == list:
+            for option in options:
+                self.options[option.signature] = option
             return self
         else:
             return self
 
     def registerCommands(self, commands):
-        
+
         if type(commands) == dict:
             for key, desc in commands.items():
                 self.commands[key] = desc
@@ -98,10 +105,10 @@ class Application():
         options = []
 
         for key, option in self.options.items():
-            options.append(self.console().formatLine('green', key) +  f" {option(self).signature[key]}")
+            options.append(self.console().formatLine('green', option.signature) +  f" {option.description}")
 
         # Print options section
-        self.console().sectionWithList('Options:', options)
+        self.console().sectionWithList('Options:', options, '')
 
     def run(self):
 
@@ -111,6 +118,16 @@ class Application():
             # Process the args
             self.processOptions()
 
+            # print(self.options)
+
             quit()
 
         self.printMainMenu()
+    
+    def __del__(self):
+
+        # Log end time
+        self.config['end'] = time.time()
+
+        # Compute execution time
+        self.config['time'] = round(self.config['end'] - self.config['start'], 2)

@@ -48,11 +48,11 @@ class ConsoleOutput:
     def line(self, message = ''):
         print(message)
 
-    def sectionWithList(self, title, options):
+    def sectionWithList(self, title, options, prefix = '- '):
         self.title(f'\n{title}')
 
         for option in options:
-            self.line(f'- {option}')
+            self.line(f'{prefix} {option}')
 
     def table(self, headers, rows):
         print('TODO')

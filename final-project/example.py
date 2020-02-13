@@ -1,8 +1,11 @@
 # My Libraries
 from console import Application
 
+# Options
+from options import Help
+
 # Commands
-from commands import Help, Version
+from commands import Version
 
 app = Application({
     'name': 'Invoice Calculator',
@@ -10,10 +13,20 @@ app = Application({
     'description': 'Summarize and get insights on your monthly sales invoices'
 })
 
-app.registerOptions({
-    'h': Help,
-    'v': Version,
-}).registerCommands({
+# app.registerOptions({
+#     'h': Help,
+#     'v': Version,
+# }).registerCommands({
+#     'new': 'Record a new sale',
+#     'export': 'Export all sales to a csv',
+# }).run()
+
+app.registerOptions([
+    Help,
+    Version,
+])
+
+app.registerCommands({
     'new': 'Record a new sale',
     'export': 'Export all sales to a csv',
 }).run()

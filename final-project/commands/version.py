@@ -1,13 +1,12 @@
-from console import Console
+class Version:
 
-class Version(Console):
+    signature = '--v'
 
-    signature = {
-        'v': 'Display the application version'
-    }
+    description = 'Display application version'
 
     def __init__(self, application):
         self.application = application
 
     def handle(self):
-        Console().line(f'\nRunning the version command\n{self.application.config["version"]}')
+        self.application.console().info(f'\n{self.application.config["version"]}')
+        
