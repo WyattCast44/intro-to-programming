@@ -5,9 +5,9 @@ from console import Application
 from options import Help
 from options import Version
 
-# Commands
-from commands import MakeCommand
+Commands
 from commands import MakeView
+from commands import MakeCommand
 
 app = Application({
     'name': 'Invoice Calculator',
