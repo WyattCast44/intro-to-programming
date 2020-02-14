@@ -51,8 +51,18 @@ The sequence [83, 20, 593, 28, 20, 51] is NOT unique!
 # Solution
 
 from helpers import *
+from options import *
+from commands import *
 
-def main():
-    Console().sectionTitle('\nUnique List Finder - v0.1.0')
+tap(Application({
+    'name': 'Unique List Finder',
+    'description': 'A small tool to help you determine if a list of items is unique',
+    'version': '1.0.0'
+})).registerOptions([
+    Help,
+    Version
+]).registerCommands([
+    CheckListUnqiueness,
+]).run()
 
-main()
+# print(collect([1, 2, 3, 4]).unique())
