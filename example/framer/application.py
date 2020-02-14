@@ -1,7 +1,7 @@
-import os, sys, time, inspect, types
-from console import Console
+import os, sys, time, inspect
+from .console import Console
 
-class Application():
+class Application:
     
     config = {
         'name': 'Console Application',
@@ -19,17 +19,18 @@ class Application():
         self.config.update(config)
 
         # Set some config values
+        self.config["script"] = sys.argv[0]
         self.config["cwd"] = os.getcwd()
         self.config['start'] = time.time()
+
+        # Remove the filename
+        sys.argv.pop(0)
 
     def console(self):
         return Console()
 
     def processOptions(self):
         
-        # Remove the file name
-        sys.argv.pop(0)
-
         # Tmp storage of unknown options
         unknownOptions = []
 
@@ -41,13 +42,44 @@ class Application():
 
                 # Option exists, need to call the handle method
                 self.runOption(option)
+
+                # Remove from the sys args
+                sys.argv.pop(sys.argv.index(option))
+
             else:
 
                 # Option does not exists, or was not registed
                 unknownOptions.append(f'Uknown option {option}')
 
         if len(unknownOptions) > 0:
-            self.console().sectionWithList('Problems:', unknownOptions)
+            self.processCommands()
+
+        quit()
+
+    def processCommands(self):
+        
+        # Tmp storage of unknown options
+        unknownCommands = []
+
+        # Process the passed args
+        for command in sys.argv:
+
+            # Check if the option is defined
+            if command in self.commands:
+
+                # Option exists, need to call the handle method
+                self.runCommand(command)
+
+                # Remove from the sys args
+                sys.argv.pop(sys.argv.index(command))
+
+            else:
+
+                # Option does not exists, or was not registed
+                unknownCommands.append(f'Uknown command/option {command}')
+
+        if len(unknownCommands) > 0:
+            self.console().sectionWithList('Problems:', unknownCommands)
     
     def registerOptions(self, options):
 
@@ -88,7 +120,16 @@ class Application():
     def runCommand(self, command):
 
         if command in self.commands:
-            self.commands[command](self).handle()
+            # Check if handler is a class
+            if isinstance(self.commands[command], type):
+                self.commands[command](self).handle()
+                return
+            # Check if handler is a function
+            elif callable(self.commands[command]):
+                self.commands[command](self)
+                return
+            else:
+                return
 
     def printMainMenu(self):
     
@@ -100,7 +141,7 @@ class Application():
 
         # Print usage section
         self.console().sectionWithList('Usage:', [
-            f"python {sys.argv[0]} [command/option]",
+            f'python {self.config["script"]} [command/option]',
         ])
 
         # Print options menu
@@ -139,19 +180,12 @@ class Application():
     def run(self):
 
         # Check if any args were passed
-        if len(sys.argv) > 1:
+        if len(sys.argv) >= 1:
 
             # Process the args
             self.processOptions()
 
-            # print(self.options)
-
-            quit()
-
         self.printMainMenu()
-
-    def setDefaultCommand(self, command):
-        return self
 
     def __del__(self):
 

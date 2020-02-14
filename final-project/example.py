@@ -9,18 +9,14 @@ from options import Version
 from commands import MakeView
 from commands import MakeCommand
 
-import commands
-
-app = Application({
+tap(Application({
     'name': 'Invoice Calculator',
     'version': '0.1.0',
     'description': 'Summarize and get insights on your monthly sales invoices'
-})
-
-app.registerOptions([
-    Help,
-    Version
-]).registerCommands([
+})).registerCommands([
     MakeView,
     MakeCommand
+]).registerOptions([
+    Help,
+    Version
 ]).run()

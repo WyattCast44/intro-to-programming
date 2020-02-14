@@ -22,14 +22,13 @@ things as well, but these are required.
 """
 
 # Standard Libraries
-import os
-import sys
+import os, sys
 
 # Other Libraries
 from tinydb import TinyDB, Query
 
 # My Libraries
-from console import Application, Console
+from console import Application
 
 # Commands
 from options import Help
@@ -43,12 +42,38 @@ app = Application({
     'description': 'Escape from Mars is a text based adventure game, where you play Mark Watney, Astronaut.'
 })
 
-app.registerOptions([
+app.setDefaultCommand(Help).registerOptions([
     Help,
-])
+]).run()
 
-app.registerCommands({
-    'h': Help
-})
+# My Libraries
+from console import Application
 
-app.run()
+# Options
+from options import Help
+from options import Version
+
+# # Commands
+# from commands import MakeView
+# from commands import MakeCommand
+
+# import commands
+# def myNewFunction(application):
+#     application.console().success('\nhello')
+
+# app = Application({
+#     'name': 'Invoice Calculator',
+#     'version': '0.1.0',
+#     'description': 'Summarize and get insights on your monthly sales invoices'
+# })
+
+# app.registerCommands([
+#     MakeView,
+#     MakeCommand
+# ]).registerOptions([
+#     Help,
+#     Version
+# ]).registerOptions({
+#     '--b': myNewFunction,
+#     '--new': myNewFunction
+# }).run()
