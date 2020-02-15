@@ -1,13 +1,10 @@
-import json
-from os import path
 from models import *
 
 class ReadSourcesIntoState:
     
-    signature = 'load:machines
-    '
+    signature = 'load:machines'
 
-    description = 'Read the data sources into app state'
+    description = 'Create machine models from the given data files'
 
     def __init__(self, application):
         self.application = application
@@ -16,11 +13,8 @@ class ReadSourcesIntoState:
 
         machines = []
 
-        # For each source, parse the json 
-        for filePath in self.application.state().get('sources'):
+        for path in self.application.state().get('sources'):
 
-            machine = Machine().fromSource(filePath)
-
-            machines.append(machine)
+            machines.append(Machine().fromSource(path))
         
         self.application.state().set('machines', machines)
