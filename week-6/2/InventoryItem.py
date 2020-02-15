@@ -64,9 +64,13 @@ def main():
     cokeItem = itemNameToInventoryItem['Coke']
 
     sortChoice = ''
+
     inventoryItemsList = list( itemNameToInventoryItem.values() )
+
     while sortChoice != 'q':
+        
         sortChoice = input('Sort by (n)ame, (p)ct sold, (s)tocking need, or (q) to quit: ')
+        
         if sortChoice == 'n':
             inventoryItemsList.sort( key=InventoryItem.getName )
         elif sortChoice == 'p':
@@ -77,6 +81,9 @@ def main():
             inventoryItemsList.reverse()
         
         print( 'Item Name            Sold     % Sold     In Stock Stock needs')
+
         for item in inventoryItemsList:
-            print( '{:20} {:8} {:8.2f}% {:8} {:8}'.format( item.getName(), item.getNumberSold(), item.getSoldPct() * 100, item.getNumberInStock(), item.getStockNeed()))
+            print( '{:20} {:8} {:8.2f}% {:8} {:8}'.format( item.getName(), item.getNumberSold(), item.getSoldPct() * 100, item.
+            getNumberInStock(), item.getStockNeed()))
+            
         print()

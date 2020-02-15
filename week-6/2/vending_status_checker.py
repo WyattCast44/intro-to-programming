@@ -21,9 +21,10 @@ app = Application({
 app.registerOptions([
     Help,
     Version,
-    Problem
+    Problem, 
+    Interactive
 ]).registerCommands([
-    ReadSourcesIntoState,
+    ReadSourcesIntoState
 ])
 
 app.state().set('sources', [
