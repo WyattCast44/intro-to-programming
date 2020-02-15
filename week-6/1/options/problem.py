@@ -1,14 +1,10 @@
-# Header
+class Problem:
 
-"""
-Week 6 Review - Part 1
-Wyatt Castaneda
-SWDV 600: INTRO TO PROGRAMMING
-"""
+    signature = '--a'
 
-# Problem 
+    description = 'Display the assignment prompt'
 
-"""
+    problem = """
 Recall, your work involves more than just correctness. Specifically, we will look for:
 
 - appropriate separation of concerns (including classes)
@@ -46,23 +42,10 @@ Next: 51
 Next: -1
 
 The sequence [83, 20, 593, 28, 20, 51] is NOT unique!
-"""
+    """
 
-# Solution
+    def __init__(self, application):
+        self.application = application
 
-from helpers import *
-from options import *
-from commands import *
-
-tap(Application({
-    'name': 'Unique List Finder',
-    'description': 'A small tool to help you determine if a list of items is unique',
-    'version': '1.0.0'
-})).registerOptions([
-    Help,
-    Version
-]).registerCommands([
-    CheckListUnqiueness,
-]).run()
-
-# print(collect([1, 2, 3, 4]).unique())
+    def handle(self):
+        self.application.console().line(self.problem)
