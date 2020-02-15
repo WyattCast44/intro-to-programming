@@ -1,9 +1,11 @@
 import json
 from os import path
+from models import *
 
 class ReadSourcesIntoState:
     
-    signature = 'sources:read'
+    signature = 'load:machines
+    '
 
     description = 'Read the data sources into app state'
 
@@ -12,11 +14,13 @@ class ReadSourcesIntoState:
 
     def handle(self):
 
-        data = []
+        machines = []
 
         # For each source, parse the json 
         for filePath in self.application.state().get('sources'):
-            data.append(json.loads(open(filePath, 'r').read()))
 
-        # Put all the parsed json blobs into app state
-        self.application.state().set('data', data)
+            machine = Machine().fromSource(filePath)
+
+            machines.append(machine)
+        
+        self.application.state().set('machines', machines)

@@ -200,3 +200,8 @@ class Application:
 
         # Compute execution time
         self.config['time'] = round(self.config['end'] - self.config['start'], 2)
+
+        # machines = self.state().get('machines')
+        
+        # for machine in machines:
+        #     print(machine)

@@ -53,10 +53,13 @@ def main():
             for slot in row['slots']:
 
                 itemName = slot['item_name']
+
                 inventoryItem = itemNameToInventoryItem.get( itemName, InventoryItem( itemName ) )
                 
                 inventoryItem.addToStocked( slot['last_stock'] )
+
                 inventoryItem.addToInStock( slot['current_stock'] )
+                
                 inventoryItem.incrementSlots();
                 
                 itemNameToInventoryItem[itemName] = inventoryItem

@@ -12,11 +12,11 @@ from helpers import *
 from options import *
 from commands import *
 
-tap(Application({
+Application({
     'name': 'Unique List Finder',
     'description': 'A small tool to help you determine if a list of items is unique',
     'version': '1.0.0'
-})).registerOptions([
+}).registerOptions([
     Help,
     Version, 
     Problem
