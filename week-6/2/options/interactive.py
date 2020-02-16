@@ -8,4 +8,6 @@ class Interactive:
         self.application = application
 
     def handle(self):
-        self.application.state().set('interactive', True)
+        self.application.config['interactive'] = True
+
+        print(self.application.config)

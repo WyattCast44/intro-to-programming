@@ -2,67 +2,47 @@ import os, sys, time, inspect
 from .state import State
 from .console import Console
 
-class Application(Console):
-
-    # State holds the instance 
-    # of the applications state
-    state = None
-        
-    # Config holds the applications
-    # base configuration values
+class Application:
+    
     config = {
         'name': 'Console Application',
         'version': '0.1.0',
         'description': 'Helping you build simple and powerful, python command line applications!',
         'interactive': False,
-        'env': 'dev' # dev, prod
     }
 
-    # Init is used to set the
-    # applications various config
-    # values
+    state = None
+
+    options = {}
+
+    commands = {}
+
     def __init__(self, config = {}):
 
-        # Init the state
+        # Create the state
         self.store = State()
 
-        # Update the application 
-        # default config, with the users
-        # values
+        # Update the application default config
         self.config.update(config)
 
         # Set some config values
+        self.config["script"] = sys.argv[0]
         self.config["cwd"] = os.getcwd()
         self.config['start'] = time.time()
-        self.config["script"] = sys.argv[0]
 
-        # Remove the filename 
-        # from the args list
+        # Remove the filename
         sys.argv.pop(0)
 
-    # An accessor for the 
-    # applications state object
     def state(self):
         return self.store
 
-    # An accessor to create
-    # console objects
     def console(self):
         return Console()
 
-    # Allows a user to set a default
-    # command that will be ran 
-    # if no args are passed 
-    # and the application is not in
-    # interactive mode
     def setDefaultCommand(self, command):
-        
-        # Register the command if not registed
-        if not command.signature in self.commands:
-            self.registerCommands(command)
+        self.registerCommands(command)
 
-        # Set the default command in app config
-        self.config["defaultCommand"] = command
+        self.config['defaultCommand'] = command
 
         return self
 
@@ -95,31 +75,28 @@ class Application(Console):
 
     def processCommands(self):
         
-        for command in sys.argv:
-            self.runCommand(command)
-
         # Tmp storage of unknown options
-        # unknownCommands = []
+        unknownCommands = []
 
-        # # Process the passed args
-        # for command in sys.argv:
+        # Process the passed args
+        for command in sys.argv:
 
-        #     # Check if the option is defined
-        #     if command in self.commands:
+            # Check if the option is defined
+            if command in self.commands:
 
-        #         # Option exists, need to call the handle method
-        #         self.runCommand(command)
+                # Option exists, need to call the handle method
+                self.runCommand(command)
 
-        #         # Remove from the sys args
-        #         sys.argv.pop(sys.argv.index(command))
+                # Remove from the sys args
+                sys.argv.pop(sys.argv.index(command))
 
-        #     else:
+            else:
 
-        #         # Option does not exists, or was not registed
-        #         unknownCommands.append(f'Uknown command/option {command}')
+                # Option does not exists, or was not registed
+                unknownCommands.append(f'Uknown command/option {command}')
 
-        # if len(unknownCommands) > 0:
-        #     self.console().sectionWithList('Problems:', unknownCommands)
+        if len(unknownCommands) > 0:
+            self.console().sectionWithList('Problems:', unknownCommands)
     
     def registerOptions(self, options):
 
@@ -134,6 +111,16 @@ class Application(Console):
         else:
             return self
 
+    def registerCommands(self, commands):
+
+        if type(commands) == list:
+            for command in commands:
+                self.commands[command.signature] = command
+            return self
+        else:
+            self.commands[commands.signature] = commands
+            return self
+
     def runOption(self, option):
 
         if option in self.options:
@@ -144,6 +131,20 @@ class Application(Console):
             # Check if handler is a function
             elif callable(self.options[option]):
                 self.options[option](self)
+                return
+            else:
+                return
+
+    def runCommand(self, command):
+
+        if command in self.commands:
+            # Check if handler is a class
+            if isinstance(self.commands[command], type):
+                self.commands[command](self).handle()
+                return
+            # Check if handler is a function
+            elif callable(self.commands[command]):
+                self.commands[command](self)
                 return
             else:
                 return
@@ -215,6 +216,8 @@ class Application(Console):
 
         if self.config["interactive"]:
             test = input('\n> ')
+        else:
+            print('done')
 
     def __del__(self):
 
@@ -223,3 +226,8 @@ class Application(Console):
 
         # Compute execution time
         self.config['time'] = round(self.config['end'] - self.config['start'], 2)
+
+        # machines = self.state().get('machines')
+        
+        # for machine in machines:
+        #     print(machine)

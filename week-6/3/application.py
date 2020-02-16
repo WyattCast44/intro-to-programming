@@ -15,7 +15,6 @@ class Application(Console):
         'version': '0.1.0',
         'description': 'Helping you build simple and powerful, python command line applications!',
         'interactive': False,
-        'env': 'dev' # dev, prod
     }
 
     # Init is used to set the
@@ -95,31 +94,28 @@ class Application(Console):
 
     def processCommands(self):
         
-        for command in sys.argv:
-            self.runCommand(command)
-
         # Tmp storage of unknown options
-        # unknownCommands = []
+        unknownCommands = []
 
-        # # Process the passed args
-        # for command in sys.argv:
+        # Process the passed args
+        for command in sys.argv:
 
-        #     # Check if the option is defined
-        #     if command in self.commands:
+            # Check if the option is defined
+            if command in self.commands:
 
-        #         # Option exists, need to call the handle method
-        #         self.runCommand(command)
+                # Option exists, need to call the handle method
+                self.runCommand(command)
 
-        #         # Remove from the sys args
-        #         sys.argv.pop(sys.argv.index(command))
+                # Remove from the sys args
+                sys.argv.pop(sys.argv.index(command))
 
-        #     else:
+            else:
 
-        #         # Option does not exists, or was not registed
-        #         unknownCommands.append(f'Uknown command/option {command}')
+                # Option does not exists, or was not registed
+                unknownCommands.append(f'Uknown command/option {command}')
 
-        # if len(unknownCommands) > 0:
-        #     self.console().sectionWithList('Problems:', unknownCommands)
+        if len(unknownCommands) > 0:
+            self.console().sectionWithList('Problems:', unknownCommands)
     
     def registerOptions(self, options):
 
@@ -215,6 +211,8 @@ class Application(Console):
 
         if self.config["interactive"]:
             test = input('\n> ')
+        else:
+            print('done')
 
     def __del__(self):
 
@@ -223,3 +221,8 @@ class Application(Console):
 
         # Compute execution time
         self.config['time'] = round(self.config['end'] - self.config['start'], 2)
+
+        # machines = self.state().get('machines')
+        
+        # for machine in machines:
+        #     print(machine)

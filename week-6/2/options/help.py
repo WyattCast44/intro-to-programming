@@ -8,4 +8,4 @@ class Help:
         self.application = application
 
     def handle(self):
-        self.application.console().line(f'\nRunning the help command')
+        self.application.printMainMenu()
