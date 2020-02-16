@@ -38,6 +38,13 @@ class Application:
     def console(self):
         return Console()
 
+    def setDefaultCommand(self, command):
+        self.registerCommands(command)
+
+        self.config['defaultCommand'] = command
+
+        return self
+
     def processOptions(self):
         
         # Tmp storage of unknown options
@@ -110,6 +117,7 @@ class Application:
                 self.commands[command.signature] = command
             return self
         else:
+            self.commands[commands.signature] = commands
             return self
 
     def runOption(self, option):
@@ -191,7 +199,15 @@ class Application:
             # Process the args
             self.processOptions()
 
-        self.printMainMenu()
+        else: 
+
+            if "defaultCommand" in self.config:
+
+                self.runCommand(self.config["defaultCommand"].signature)
+
+            else:
+                
+                self.printMainMenu()
 
     def __del__(self):
 

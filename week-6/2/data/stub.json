@@ -1,0 +1,30 @@
+{
+    "contents": [
+        {
+            "row": "A",
+            "slots": [
+                {
+                    "current_stock": 0,
+                    "item_name": "Coke",
+                    "item_price": 1.75,
+                    "last_stock": 5,
+                    "slot_number": 1
+                }
+            ]
+        },
+        {
+            "row": "B",
+            "slots": [
+                {
+                    "current_stock": 0,
+                    "item_name": "Coke",
+                    "item_price": 1.75,
+                    "last_stock": 5,
+                    "slot_number": 1
+                }
+            ]
+        }
+    ],
+    "machine_id": "id",
+    "machine_label": "label"
+}

@@ -16,16 +16,14 @@ app = Application({
     'name': 'Vending Machine Inventory Checker',
     'description': 'A small tool to help keep track of your vending machine empire',
     'version': '0.1.2'
-})
-
-app.registerOptions([
+}).registerOptions([
     Help,
     Version,
     Problem, 
     Interactive
 ]).registerCommands([
     ReadSourcesIntoState
-])
+]).setDefaultCommand(ReadSourcesIntoState)
 
 app.state().set('sources', [
     app.config['cwd'] + '/data/REID_1F_20171004.json', 
