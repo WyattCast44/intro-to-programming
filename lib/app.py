@@ -1,6 +1,5 @@
 from src import Application
 from src.commands import MakeCommand, MakeOption
-import commands
 
 Application({
     'name': 'My App',
@@ -9,5 +8,4 @@ Application({
 }).registerCommands([
     MakeOption,
     MakeCommand,
-    MyCommand
 ]).run()

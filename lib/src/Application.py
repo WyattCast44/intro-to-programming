@@ -48,8 +48,6 @@ class Application(Console):
 
         print('\nrunning\n')
 
-        self.runCommand('make:command')
-
     def __del__(self):
 
         # Log script end time
