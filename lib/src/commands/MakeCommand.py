@@ -32,18 +32,43 @@ class MakeCommand:
 
     def __init__(self, application):
         self.application = application
+
+        self.path = self.application.state().get('config.cwd') + '/commands/'
+
         return
 
     def handle(self, args=[]):
 
-        stub = self.stub.replace("[:command:]", 'MyCommand')
+        self.ensureCommandsDirExists()
+        self.createCommand(args)
+        self.ensureCommandInitFileExists()
+        self.appendToInitFile()
 
-        path = self.application.state().get('config.cwd') + '/commands/'
+    def ensureCommandsDirExists(self):
 
-        Filesystem.ensureDirExists(path)
+        Filesystem.ensureDirExists(self.path)
 
-        path = path + 'MyCommand.py'
+    def ensureCommandInitFileExists(self):
+
+        path = self.path + '__init__.py'
+
+        Filesystem.ensureFileExists(path)
+
+    def prepStub(self, args=[]):
+        return self.stub.replace("[:command:]", 'MyCommand')
+
+    def createCommand(self, args=[]):
+        path = self.path + 'MyCommand.py'
 
         command = open(path, 'w')
-        command.write(stub)
+
+        command.write(self.prepStub(args))
+
         command.close()
+
+    def appendToInitFile(self):
+        path = self.path + '__init__.py'
+
+        init = open(path, 'a')
+        init.write('from .MyCommand import MyCommand')
+        init.close()

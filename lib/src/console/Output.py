@@ -1,4 +1,6 @@
-import sys, time
+import sys
+import time
+
 
 class Output:
 
@@ -17,13 +19,13 @@ class Output:
 
     def formatLine(self, formats, content):
 
-        formatted = content 
+        formatted = content
 
         if type(formats) == list:
             for index in formats:
                 formatted = f'{self.formatters.get(index)}{formatted}{self.formatters.get("end")}'
         else:
-            formatted = f'{self.formatters.get(formats)}{formatted}{self.formatters.get("end")}' 
+            formatted = f'{self.formatters.get(formats)}{formatted}{self.formatters.get("end")}'
 
         return formatted
 
@@ -36,7 +38,7 @@ class Output:
     def info(self, message):
         print(self.formatLine('yellow', message))
 
-    def title(self, message, formats = ['yellow']):
+    def title(self, message, formats=['yellow']):
 
         if formats != []:
             message = self.formatLine(formats, message)
@@ -45,10 +47,10 @@ class Output:
 
         print(f'{message}\n{underline}')
 
-    def line(self, message = ''):
+    def line(self, message=''):
         print(message)
 
-    def sectionWithList(self, title, options, prefix = '- '):
+    def sectionWithList(self, title, options, prefix='- '):
         self.title(f'\n{title}')
 
         for option in options:
@@ -56,7 +58,7 @@ class Output:
 
     def table(self, headers, rows):
         print('TODO')
-    
+
     def typed(self, message, delay=0.1):
         for letter in message:
             time.sleep(delay)

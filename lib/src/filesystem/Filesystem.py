@@ -5,4 +5,16 @@ class Filesystem:
 
     @staticmethod
     def ensureDirExists(fullPath):
-        Path(fullPath).mkdir(parents=True, exist_ok=True)
+        Filesystem.mkdir(fullPath, True, False)
+
+    @staticmethod
+    def mkdir(fullPath, makeParents=True, errorIfExists=False):
+        Path(fullPath).mkdir(parents=makeParents, exist_ok=errorIfExists)
+
+    @staticmethod
+    def ensureFileExists(fullPath):
+        Filesystem.touch(fullPath, errorIfExists=False)
+
+    @staticmethod
+    def touch(fullPath, errorIfExists=False):
+        Path(fullPath).touch(exist_ok=errorIfExists)

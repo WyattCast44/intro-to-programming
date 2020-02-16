@@ -1,14 +1,15 @@
 from .Output import Output
 
+
 class Input(Output):
 
     def ask(self, question):
         self.info(f'\n{question}\n')
 
-        return input(f'> ')        
-    
+        return input(f'> ')
+
     def askWithOptions(self, question, options):
-        
+
         self.sectionWithOptions(question, options)
 
         given = input('\n> ')

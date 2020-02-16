@@ -10,12 +10,12 @@ class Repository:
     # an error is raised
     def set(self, key, value):
 
-        # Dont overide store    
+        # Dont overide store
         if self.has(key):
             print('error')
 
             return self
-        
+
         # Set the store
         self.store[key] = value
 
@@ -33,7 +33,7 @@ class Repository:
 
     # upsert() allows you to provide a key
     # and value, if the key is already defined
-    # in the store, it will be updated, if 
+    # in the store, it will be updated, if
     # it doesn't, it will be set
     def upsert(self, key, value):
 
@@ -44,17 +44,17 @@ class Repository:
 
         return self
 
-    # has() allows to check if a key is 
+    # has() allows to check if a key is
     # set in the store
     def has(self, key):
 
         return (key in self.store)
 
-    # get() allows you to get the value of 
+    # get() allows you to get the value of
     # a key set in the store, or if no key
-    # is provided, then the entire store 
+    # is provided, then the entire store
     # is returned
-    def get(self, key = None, defaultValue = None):
+    def get(self, key=None, defaultValue=None):
 
         if key == None:
             return self.store
@@ -73,7 +73,7 @@ class Repository:
         # Create the key if it doesn't exist
         if not self.has(key):
             self.set(key, {})
-        
+
         current = self.get(key)
 
         current[subkey] = value
@@ -81,4 +81,3 @@ class Repository:
         self.update(key, current)
 
         return self
-        

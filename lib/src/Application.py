@@ -1,12 +1,10 @@
 import os
 import sys
-from .support import *
+from .support import Repository, Time, HasState
 from .console import Console
 
 
-class Application(Console):
-
-    store = None
+class Application(Console, HasState):
 
     config = {
         'name': 'Console Application',
@@ -17,7 +15,7 @@ class Application(Console):
 
     def __init__(self, config={}):
 
-        self.store = Repository()
+        super(HasState, self).__init__()
 
         # Update config w/users config
         self.config.update(config)
@@ -28,11 +26,7 @@ class Application(Console):
         self.state().append('config', 'script', sys.argv[0])
 
         # Remove the filename from the args list
-        sys.argv.pop(0)
-
-    def state(self):
-
-        return self.store
+        # sys.argv.pop(0)
 
     def run(self):
 
@@ -47,6 +41,15 @@ class Application(Console):
         #   - we need to see if there is a default command
 
         print('\nrunning\n')
+
+    def printMenu(self):
+        print()
+
+    def printOptions(self):
+        print()
+
+    def printCommands(self):
+        print()
 
     def __del__(self):
 

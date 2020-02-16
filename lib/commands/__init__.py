@@ -1,1 +1,0 @@
-from .MyCommand import MyCommand
