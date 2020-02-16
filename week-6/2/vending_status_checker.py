@@ -1,13 +1,3 @@
-# Header
-
-"""
-Week 6 Review - Part 2
-Wyatt Castaneda
-SWDV 600: INTRO TO PROGRAMMING
-"""
-
-# Solution
-
 from helpers import *
 from options import *
 from commands import *
@@ -23,7 +13,7 @@ app = Application({
     Interactive
 ]).registerCommands([
     ReadSourcesIntoState
-]).setDefaultCommand(ReadSourcesIntoState)
+]).setDefaultCommand(Interactive)
 
 app.state().set('sources', [
     app.config['cwd'] + '/data/REID_1F_20171004.json', 
