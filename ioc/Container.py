@@ -22,9 +22,9 @@ class Container:
 
 class Repo:
 
-    def __init__(self, configKey):
+    def __init__(self, configKey, name):
         self.key = configKey
-        print(self.key)
+        print(self.key, name)
 
 
 class RepoServiceProvider:
@@ -33,12 +33,13 @@ class RepoServiceProvider:
         self.container = cont
 
     def register(self):
-        return Repo(self.container.resolve('key'))
+        return Repo(self.container.resolve('key'), self.container.resolve('name'))
 
 
 c = Container()
 
 c.bind('key', 'wyatt')
+c.bind('name', 'wyatt-is-cool')
 c.bind(Repo, RepoServiceProvider)
 
 print(c.resolve(Repo))
