@@ -7,3 +7,9 @@ CLIHero turns anyone into a **Command-Line Hero** (👨‍💻👩‍💻) by he
 ```bash
 pip install CLIHero
 ```
+
+# Requirements
+
+## Modules
+p
+- camelcase

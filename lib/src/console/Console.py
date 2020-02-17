@@ -78,6 +78,8 @@ class Console:
 
     def processArguments(self, args=[]):
 
+        self.validateArguments(args)
+
         for option in self.optionsStack:
             self.options[option](self).handle()
 

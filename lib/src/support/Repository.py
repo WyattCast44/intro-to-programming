@@ -1,19 +1,25 @@
+import functools
+
+
 class Repository:
 
-    store = {}
+    store = None
 
     def __init__(self):
+
+        self.store = {}
+
         return
 
     # set() allows you to set a value in
     # the store, if the key already exists
     # an error is raised
-    def set(self, key, value):
+    def set(self, key, value, override=False):
 
         # Dont overide store
-        if self.has(key):
-            print('error')
-
+        if self.has(key) and not override:
+            raise Exception(
+                f"Attempted to set a value already set in state. Key: {key}")
             return self
 
         # Set the store
@@ -27,9 +33,17 @@ class Repository:
     def update(self, key, value):
 
         if not self.has(key):
-            print('error')
+            raise Exception(
+                f"Attempted to update a value not set in state. Key: {key}")
+            return self
 
-        self.store[key] = value
+        if '.' in key:
+            # TODO: implement
+            raise Exception('TODO: Make work')
+        else:
+            self.store[key] = value
+
+        return self
 
     # upsert() allows you to provide a key
     # and value, if the key is already defined
@@ -48,7 +62,17 @@ class Repository:
     # set in the store
     def has(self, key):
 
-        return (key in self.store)
+        if "." in key:
+
+            keys = key.split('.')
+
+            value = functools.reduce(lambda d, key: d.get(
+                key) if d else None, keys, self.store)
+
+            return (value != None)
+
+        else:
+            return (key in self.store)
 
     # get() allows you to get the value of
     # a key set in the store, or if no key
@@ -59,14 +83,14 @@ class Repository:
         if key == None:
             return self.store
 
+        if not self.has(key):
+            return defaultValue
+
         if '.' in key:
-            keys = key.split('.')
-            return self.store[keys[0]][keys[1]]
-
-        if self.has(key):
+            return functools.reduce(lambda d, key: d.get(
+                key) if d else None, key.split('.'), self.store)
+        else:
             return self.store[key]
-
-        return defaultValue
 
     def append(self, key, subkey, value):
 

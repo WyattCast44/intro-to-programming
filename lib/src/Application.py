@@ -1,6 +1,6 @@
 import os
 import sys
-from .support import Repository, Time, HasState
+from .support import Repository, Time, HasState, sleep
 from .console import Console
 
 
@@ -30,13 +30,7 @@ class Application(Console, HasState):
     def run(self):
 
         if len(self.state().get('rawArgs')) > 0:
-            # Validate args
-            self.validateArguments(self.state().get('rawArgs'))
-
-            # Process args
             self.processArguments(self.state().get('rawArgs'))
-        else:
-            print('no args were passed')
 
         # When running the app, we need to
         # - check if any args were passed
@@ -60,5 +54,6 @@ class Application(Console, HasState):
         # Log script end time
         self.state().append('config', 'end', Time.now())
 
-        # TODO: Compute execution time
-        self.state().append('config', 'duration', Time.now())
+        # Compute execution time
+        duration = self.state().get('config.end') - self.state().get('config.start')
+        self.state().append('config', 'duration', duration)
