@@ -9,4 +9,4 @@ class Help:
         return
 
     def handle(self):
-        pass
+        self.application.output().success('Showing the help command')

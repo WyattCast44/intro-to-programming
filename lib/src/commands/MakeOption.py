@@ -14,4 +14,4 @@ class MakeOption:
         return
 
     def handle(self):
-        path = self.application.state().get('cwd') + 'options'
+        self.application.output().error('cool')

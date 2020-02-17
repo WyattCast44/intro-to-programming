@@ -7,6 +7,7 @@ class Console:
 
     options = {}
     commands = {}
+    optionsStack = []
     commandStack = []
 
     def __init__(self):
@@ -35,23 +36,16 @@ class Console:
             if self.isOption(arg):
 
                 # We can move onto next arg
-                self.commandStack.append(arg)
+                self.optionsStack.append(arg)
 
             elif self.isCommand(arg):
 
-                # We can add to stack and loop again
-                self.commandStack.append(arg)
-
                 # We need to get the args for the command and validate them
-                commandArgs = args[args.index(arg)+1:]
-
-                # There was args passed that need to be validated
-                if self.validateCommandArgs(arg, commandArgs):
-                    # valid args
-                    print('command is valid')
-                    print(self.commandStack)
+                if self.validateCommandArgs(arg, args[args.index(arg)+1:]):
+                    # Args are valid for command
+                    self.commandStack.append(arg)
                 else:
-                    # invalid args
+                    # Args are invalid for command
                     print('\ncommand is invalid')
 
                 break
@@ -114,7 +108,11 @@ class Console:
 
     def processArguments(self, args=[]):
 
-        print()
+        for option in self.optionsStack:
+            self.options[option](self).handle()
+
+        for command in self.commandStack:
+            self.commands[command](self).handle()
 
     ##
     # Options

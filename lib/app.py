@@ -1,10 +1,6 @@
 from src import Application
-from src.options import Help
+from src.options import Help, Verbose
 from src.commands import MakeCommand, MakeOption
-
-
-def setInteractive(app):
-    app.state().upsert('config.interactive', True)
 
 
 Application({
@@ -15,5 +11,6 @@ Application({
     MakeOption,
     MakeCommand,
 ]).registerOptions([
-    Help
+    Help,
+    Verbose
 ]).run()
