@@ -23,11 +23,6 @@ class Console:
     ##
     # CLI
     ##
-    def isOption(self, option):
-        return (option in self.options)
-
-    def isCommand(self, command):
-        return (command in self.commands)
 
     def validateArguments(self, args=[]):
 
@@ -81,31 +76,6 @@ class Console:
             # as none were passed command is valid
             return (len(args) == 0)
 
-    def validateArgumentsOld(self, args=[]):
-
-        # TODO: make work with command args
-        valid = True
-
-        # Ensure args were passed
-        if len(args) > 0:
-
-            # Loop thru all args and check if it is a registered
-            # option or a command.
-            for arg in args:
-
-                # Check if option
-                if arg in self.options:
-                    continue
-                # Check if command
-                elif arg in self.commands:
-                    continue
-                else:
-                    valid = False
-
-        if not valid:
-            raise Exception(
-                "One or more invalid/unknown arguments were passed. Please try again")
-
     def processArguments(self, args=[]):
 
         for option in self.optionsStack:
@@ -117,6 +87,9 @@ class Console:
     ##
     # Options
     ##
+
+    def isOption(self, option):
+        return (option in self.options)
 
     def registerOption(self, key, handler):
 
@@ -146,7 +119,7 @@ class Console:
 
         return self
 
-    def runOption(self, option):
+    def runOption(self, option, args=[]):
 
         # Ensure that option is registered
         if option in self.options:
@@ -172,6 +145,9 @@ class Console:
     ##
     # Commands
     ##
+
+    def isCommand(self, command):
+        return (command in self.commands)
 
     def registerCommand(self, key, handler):
 
@@ -201,7 +177,7 @@ class Console:
 
         return self
 
-    def runCommand(self, command):
+    def runCommand(self, command, args=[]):
 
         # Ensure that command is registered
         if command in self.commands:
