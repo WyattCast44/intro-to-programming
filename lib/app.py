@@ -1,6 +1,11 @@
 from src import Application
 from src.commands import MakeCommand, MakeOption
 
+
+def setInteractive(app):
+    app.state().upsert('config.interactive', True)
+
+
 Application({
     'name': 'My App',
     'description': 'My first CLI app!',
@@ -8,4 +13,6 @@ Application({
 }).registerCommands([
     MakeOption,
     MakeCommand,
-]).run()
+]).registerOptions({
+    '--i': setInteractive
+}).run()

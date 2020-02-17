@@ -1,3 +1,4 @@
+import sys
 from .Input import Input
 from .Output import Output
 
@@ -6,8 +7,10 @@ class Console:
 
     options = {}
     commands = {}
+    commandStack = []
 
     def __init__(self):
+        super(Console, self).__init__()
         return
 
     def input(self):
@@ -15,6 +18,103 @@ class Console:
 
     def output(self):
         return Output()
+
+    ##
+    # CLI
+    ##
+    def isOption(self, option):
+        return (option in self.options)
+
+    def isCommand(self, command):
+        return (command in self.commands)
+
+    def validateArguments(self, args=[]):
+
+        for arg in args:
+
+            if self.isOption(arg):
+
+                # We can move onto next arg
+                self.commandStack.append(arg)
+
+            elif self.isCommand(arg):
+
+                # We can add to stack and loop again
+                self.commandStack.append(arg)
+
+                # We need to get the args for the command and validate them
+                commandArgs = args[args.index(arg)+1:]
+
+                # There was args passed that need to be validated
+                if self.validateCommandArgs(arg, commandArgs):
+                    # valid args
+                    print('command is valid')
+                    print(self.commandStack)
+                else:
+                    # invalid args
+                    print('\ncommand is invalid')
+
+                break
+
+            else:
+                raise Exception(
+                    f"Invalid command/option, please try again. Invalid item: {arg}")
+
+    def validateCommandArgs(self, command, args):
+
+        if hasattr(self.commands[command], 'args'):
+
+            # command has args defined, we
+            # need to validate that the required
+            # args are present
+
+            hasDefaultArg = False
+
+            if "default" in self.commands[command].args:
+                hasDefaultArg = True
+
+            if len(args) == 1 and hasDefaultArg:
+                # if there is only one arg and the command has
+                # a default arg, all good to go!
+                return True
+
+            for key, desc in self.commands[command].args.items():
+
+                isKeyRequired = (key[-1:] != '?')
+
+        else:
+            # command has no args, as long
+            # as none were passed command is valid
+            return (len(args) == 0)
+
+    def validateArgumentsOld(self, args=[]):
+
+        # TODO: make work with command args
+        valid = True
+
+        # Ensure args were passed
+        if len(args) > 0:
+
+            # Loop thru all args and check if it is a registered
+            # option or a command.
+            for arg in args:
+
+                # Check if option
+                if arg in self.options:
+                    continue
+                # Check if command
+                elif arg in self.commands:
+                    continue
+                else:
+                    valid = False
+
+        if not valid:
+            raise Exception(
+                "One or more invalid/unknown arguments were passed. Please try again")
+
+    def processArguments(self, args=[]):
+
+        print()
 
     ##
     # Options

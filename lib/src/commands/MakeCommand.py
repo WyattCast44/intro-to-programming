@@ -33,7 +33,7 @@ class MakeCommand:
     def __init__(self, application):
         self.application = application
 
-        self.path = self.application.state().get('config.cwd') + '/commands/'
+        self.path = self.application.state().get('cwd') + '/commands/'
 
         return
 

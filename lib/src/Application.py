@@ -9,38 +9,42 @@ class Application(Console, HasState):
     config = {
         'name': 'Console Application',
         'version': '1.0.0',
-        'cwd': os.getcwd(),
         'description': 'Helping you build command line applications',
+        'interactive': False
     }
 
     def __init__(self, config={}):
 
-        super(HasState, self).__init__()
+        super(Application, self).__init__()
 
         # Update config w/users config
         self.config.update(config)
 
         # Set config in state
+        self.state().set('cwd', os.getcwd())
         self.state().set('config', self.config)
+        self.state().set('rawArgs', sys.argv[1:])
         self.state().append('config', 'start', Time.now())
         self.state().append('config', 'script', sys.argv[0])
 
-        # Remove the filename from the args list
-        # sys.argv.pop(0)
-
     def run(self):
+
+        if len(self.state().get('rawArgs')) > 0:
+            # Validate args
+            self.validateArguments(self.state().get('rawArgs'))
+
+            # Process args
+            self.processArguments(self.state().get('rawArgs'))
+        else:
+            print('no args were passed')
 
         # When running the app, we need to
         # - check if any args were passed
         # - if they was
-        #   - we need to check if it matches any user options
-        #   - we need to check if it matches any internal options
-        #   - we need to check if it matches any user commands
-        #   - we need to check if it matches any internal commands
+        #   - we need to check if it matches any options
+        #   - we need to check if it matches any commands
         # - else
         #   - we need to see if there is a default command
-
-        print('\nrunning\n')
 
     def printMenu(self):
         print()

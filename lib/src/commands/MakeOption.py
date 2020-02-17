@@ -5,8 +5,8 @@ class MakeOption:
     description = "Create a new application option"
 
     args = {
-        'default': "The name of the class to make",
-        '--f': "Overwrite any file with same name"
+        'default': 'The name of the file to create',
+        '--f=False': "Force create the file"
     }
 
     def __init__(self, application):
@@ -14,4 +14,4 @@ class MakeOption:
         return
 
     def handle(self):
-        path = self.application.state().get('config.cwd') + 'options'
+        path = self.application.state().get('cwd') + 'options'
