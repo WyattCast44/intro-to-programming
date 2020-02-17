@@ -40,4 +40,3 @@ Application({
     DefaultCommand,
 ]).setDefaultCommand(DefaultCommand).run()
 ```
-CLIHero
