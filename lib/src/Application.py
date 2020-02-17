@@ -1,7 +1,7 @@
 import os
 import sys
-from .support import Repository, Time, HasState, sleep
 from .console import Console
+from .support import Repository, Time, HasState, sleep
 
 
 class Application(Console, HasState):
@@ -23,14 +23,14 @@ class Application(Console, HasState):
         # Set config in state
         self.state().set('cwd', os.getcwd())
         self.state().set('config', self.config)
-        self.state().set('rawArgs', sys.argv[1:])
+        self.state().set('args', sys.argv[1:])
         self.state().append('config', 'start', Time.now())
         self.state().append('config', 'script', sys.argv[0])
 
     def run(self):
 
-        if len(self.state().get('rawArgs')) > 0:
-            self.processArguments(self.state().get('rawArgs'))
+        if len(self.state().get('args')) > 0:
+            self.processArguments(self.state().get('args'))
 
         # When running the app, we need to
         # - check if any args were passed
