@@ -29,6 +29,8 @@ class Repo:
 
 class RepoServiceProvider:
 
+    key = Repo
+
     def __init__(self, cont):
         self.container = cont
 

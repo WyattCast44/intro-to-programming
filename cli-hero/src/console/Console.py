@@ -95,7 +95,11 @@ class Console:
             self.options[option](self).handle()
 
         for command in self.commandStack:
-            self.commands[command](self).handle()
+            if type(command) == type:
+                # class
+                self.commands[command](self).handle()
+            elif callable(self.commands[command]):
+                self.commands[command](self)
 
     ##
     # Options
