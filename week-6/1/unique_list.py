@@ -5,9 +5,6 @@ Week 6 Review - Part 1
 Wyatt Castaneda
 SWDV 600: INTRO TO PROGRAMMING
 """
-
-# Solution
-
 from helpers import *
 from options import *
 from commands import *
@@ -18,7 +15,7 @@ Application({
     'version': '1.0.0'
 }).registerOptions([
     Help,
-    Version, 
+    Version,
     Problem
 ]).registerCommands([
     CheckListUnqiueness,

@@ -1,8 +1,12 @@
-import os, sys, time, inspect
+import os
+import sys
+import time
+import inspect
 from .console import Console
 
+
 class Application:
-    
+
     config = {
         'name': 'Console Application',
         'version': '0.1.0',
@@ -13,7 +17,7 @@ class Application:
 
     commands = {}
 
-    def __init__(self, config = {}):
+    def __init__(self, config={}):
 
         # Update the application default config
         self.config.update(config)
@@ -30,7 +34,7 @@ class Application:
         return Console()
 
     def processOptions(self):
-        
+
         # Tmp storage of unknown options
         unknownOptions = []
 
@@ -57,7 +61,7 @@ class Application:
         quit()
 
     def processCommands(self):
-        
+
         # Tmp storage of unknown options
         unknownCommands = []
 
@@ -80,7 +84,7 @@ class Application:
 
         if len(unknownCommands) > 0:
             self.console().sectionWithList('Problems:', unknownCommands)
-    
+
     def registerOptions(self, options):
 
         if type(options) == list:
@@ -132,7 +136,7 @@ class Application:
                 return
 
     def printMainMenu(self):
-    
+
         # Print name and version
         self.console().title(f'\n{self.config["name"]}', 'green')
 
@@ -160,7 +164,8 @@ class Application:
 
         for key, option in self.options.items():
             if isinstance(option, type):
-                options.append(self.console().formatLine('green', option.signature) +  f" {option.description}")
+                options.append(self.console().formatLine(
+                    'green', option.signature) + f" {option.description}")
             else:
                 options.append(self.console().formatLine('green', key))
 
@@ -172,7 +177,8 @@ class Application:
         commands = []
 
         for key, command in self.commands.items():
-            commands.append(self.console().formatLine('green', command.signature) +  f" {command.description}")
+            commands.append(self.console().formatLine(
+                'green', command.signature) + f" {command.description}")
 
         # Print commands section
         self.console().sectionWithList('Commands:', commands, '')
@@ -193,4 +199,5 @@ class Application:
         self.config['end'] = time.time()
 
         # Compute execution time
-        self.config['time'] = round(self.config['end'] - self.config['start'], 2)
+        self.config['time'] = round(
+            self.config['end'] - self.config['start'], 2)
