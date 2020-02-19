@@ -1,22 +1,13 @@
 class Collection:
     items = []
 
-    def __init__(self, items = []):
+    def __init__(self, items=[]):
         self.items = items
 
         return
 
-    def all(self):
-        return
-
-    def average(self):
-        return
-
-    def chunk(self):
-        return
-
     def unique(self):
-        
+
         unique = set()
 
         repeats = []
@@ -31,6 +22,7 @@ class Collection:
 
         return (len(repeats) == 0)
 
-def collect(items = []):
-    col =  Collection(items)
+
+def collect(items=[]):
+    col = Collection(items)
     return col

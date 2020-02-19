@@ -1,10 +1,11 @@
 from helpers import collect
 
+
 class CheckListUnqiueness:
 
     signature = 'check-list'
 
-    description = 'An interactive proccess to check a list uniqueness'
+    description = 'An interactive proccess to check a lists uniqueness'
 
     def __init__(self, application):
         self.application = application
@@ -30,7 +31,8 @@ class CheckListUnqiueness:
 
         # Determine list uniqueness
         if collect(items).unique():
-            self.application.console().success(f'\nThe sequence {items} is unique!')
+            self.application.console().success(
+                f'\nThe sequence {items} is unique!')
         else:
-            self.application.console().error(f'\nThe sequence {items} is not unique!')
-    
+            self.application.console().error(
+                f'\nThe sequence {items} is not unique!')
