@@ -23,9 +23,14 @@ class Application(Console, HasState):
         # Set config in state
         self.state().set('cwd', os.getcwd())
         self.state().set('config', self.config)
+        self.state().set('script', sys.argv[0])
         self.state().set('args', sys.argv[1:])
         self.state().append('config', 'start', Time.now())
-        self.state().append('config', 'script', sys.argv[0])
+
+    def printUsageMenu(self):
+
+        self.output().sectionWithList(
+            'Usage:', [f'python {self.state().get("script")} [option/command]'], '')
 
     def run(self):
 
@@ -33,6 +38,14 @@ class Application(Console, HasState):
 
             # There is arguments to validate and process
             self.processArguments(self.state().get('args'))
+
+        else:
+
+            self.printUsageMenu()
+
+            self.printOptionsMenu()
+
+            self.printCommandMenu()
 
         # When running the app, we need to
         # - check if any args were passed

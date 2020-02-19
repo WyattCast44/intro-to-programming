@@ -8,8 +8,7 @@ class MakeCommand:
     description = "Create a new application command"
 
     args = {
-        'default': "The name of the class to make",
-        '--f': "Overwrite any file with same name"
+        'name': "The name of the class to make",
     }
 
     stub = """class [:command:]:

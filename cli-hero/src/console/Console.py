@@ -95,8 +95,7 @@ class Console:
             self.options[option](self).handle()
 
         for command in self.commandStack:
-            if type(command) == type:
-                # class
+            if type(self.commands[command]) == type:
                 self.commands[command](self).handle()
             elif callable(self.commands[command]):
                 self.commands[command](self)
@@ -159,6 +158,17 @@ class Console:
         else:
             raise Exception(f'Unknown option: {option}')
 
+    def printOptionsMenu(self):
+
+        options = []
+
+        for key, option in self.options.items():
+
+            options.append(self.output().formatLine(
+                'green', option.signature) + f" {option.description}")
+
+        self.output().sectionWithList('Options:', options, '')
+
     ##
     # Commands
     ##
@@ -216,3 +226,14 @@ class Console:
 
         else:
             raise Exception(f'Unknown command: {command}')
+
+    def printCommandMenu(self):
+
+        commands = []
+
+        for key, command in self.commands.items():
+
+            commands.append(self.output().formatLine(
+                'green', command.signature) + f" {command.description}")
+
+        self.output().sectionWithList('Commands:', commands, '')
