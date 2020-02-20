@@ -10,7 +10,8 @@ class Application(Console, HasState):
         'name': 'Console Application',
         'version': '1.0.0',
         'description': 'Helping you build command line applications',
-        'interactive': False
+        'interactive': False,
+        'env': 'dev'  # dev, prod
     }
 
     def __init__(self, config={}):
