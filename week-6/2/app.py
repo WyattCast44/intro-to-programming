@@ -1,6 +1,6 @@
 from cliff import Application
 from options import Problem, Version
-from commands import PrintInventoryReport, PrintMachinesList, PrintMachinesReport
+from commands import PrintInventoryReport, PrintMachinesList, PrintMachinesReport, ReadSourcesIntoState
 
 app = Application({
     'name': 'Vending Machine Inventory Checker',
@@ -8,8 +8,9 @@ app = Application({
     'version': '1.2.0',
 }).registerCommands([
     PrintMachinesList,
+    ReadSourcesIntoState,
     PrintMachinesReport,
-    PrintInventoryReport
+    PrintInventoryReport,
 ]).registerOptions([
     Problem,
     Version

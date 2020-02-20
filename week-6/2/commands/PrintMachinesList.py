@@ -1,3 +1,6 @@
+from .ReadSourcesIntoState import ReadSourcesIntoState
+
+
 class PrintMachinesList:
 
     signature = 'print:machines-list'
@@ -8,4 +11,7 @@ class PrintMachinesList:
         self.application = application
 
     def handle(self):
+
+        s = ReadSourcesIntoState(self.application).handle()
+
         self.application.output().error('\nTODO\n')

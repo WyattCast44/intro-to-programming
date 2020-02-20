@@ -1,4 +1,4 @@
-from models import *
+from models import Machine
 
 
 class ReadSourcesIntoState:
@@ -11,6 +11,9 @@ class ReadSourcesIntoState:
         self.application = application
 
     def handle(self):
+
+        # For each data file in state, create a machine model and
+        # store models in state
 
         machines = []
 

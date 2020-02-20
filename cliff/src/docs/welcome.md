@@ -9,3 +9,5 @@ pip install cliff
 ```
 
 # Requirements
+
+- attrdict==2.0.1

@@ -1,62 +1,41 @@
 import json
 
+
 class Machine:
-
-    sourcePath = None
-
-    rawContents = None
-
-    jsonContents = None
 
     attributes = {}
 
-    def fromSource(self, path):
-        self.sourcePath = path
+    source, rawContents, jsonContents = None, None, None
 
-        self.loadSource()
+    def fromSource(self, path):
+        self.source = path
+
+        self.loadSource().parseContents()
 
         return self
 
     def loadSource(self):
+        # Read the file into memory
+        self.rawContents = open(self.source, 'r').read()
 
-        self.rawContents = open(self.sourcePath, 'r').read() 
+        return self
 
+    def parseContents(self):
+
+        # Get the raw json
         self.jsonContents = json.loads(self.rawContents)
 
+        # Grab the id
         self.attributes['id'] = self.jsonContents['machine_id']
 
+        # Grab the name
         self.attributes['name'] = self.jsonContents['machine_label']
 
-        return self
-
-    def get(self, key):
-        return self.attributes[key]
-
-    def dump(self):
-
-        print(self.attributes)
+        # Grab the content
+        self.attributes['contents'] = self.jsonContents['contents']
 
         return self
 
-# class MachineRow:
-#     pass
+    def __del__(self):
 
-# class RowSlot:
-#     pass
-
-# class MachineStatus:
-#     pass
-
-# Machine('source-file').id
-# Machine('source-file').name
-# Machine('source-file').slots
-# Machine('source-file').slotsCount
-# Machine('source-file').items
-# Machine('source-file').itemsCount
-
-"""
-A machine has 
-- rows
-- slots
-- items
-"""
+        print(self.attributes["id"], self.attributes["name"])
