@@ -8,5 +8,5 @@ class Version:
         self.application = application
 
     def handle(self):
-        self.application.console().info(f'\n{self.application.config["version"]}')
-        
+        self.application.output().info(
+            f'\n{self.application.state().get("config.version")}')

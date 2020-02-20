@@ -1,7 +1,8 @@
 from models import *
 
+
 class ReadSourcesIntoState:
-    
+
     signature = 'load:machines'
 
     description = 'Create machine models from the given data files'
@@ -16,5 +17,5 @@ class ReadSourcesIntoState:
         for path in self.application.state().get('sources'):
 
             machines.append(Machine().fromSource(path))
-        
+
         self.application.state().set('machines', machines)

@@ -42,4 +42,4 @@ HINT: Start by making sure you understand how the counting is done for inventory
         self.application = application
 
     def handle(self):
-        self.application.console().line(self.problem)
+        self.application.output().line(self.problem)

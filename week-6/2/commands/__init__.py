@@ -1,1 +1,4 @@
+from .PrintMachinesList import PrintMachinesList
+from .PrintMachinesReport import PrintMachinesReport
 from .ReadSourcesIntoState import ReadSourcesIntoState
+from .PrintInventoryReport import PrintInventoryReport
