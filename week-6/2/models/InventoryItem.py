@@ -36,6 +36,13 @@ class InventoryItem:
         return '{} In Stock: {}, Stocked: {}, Slots: {}'.format(self.name, self.totalInStock, self.totalStocked, self.totalSlots)
 
 
+class MachineStatus:
+
+    currentStock = None
+    totalSales = None
+    percentSold = None
+
+
 def main():
 
     inventoryFileNames = ["REID_1F_20171004.json",

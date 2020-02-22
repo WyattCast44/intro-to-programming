@@ -54,7 +54,7 @@ class Output:
         self.title(f'\n{title}')
 
         for option in options:
-            self.line(f'{prefix} {option}')
+            self.line(f'{prefix}{option}')
 
     def table(self, headers, rows):
         print('TODO')

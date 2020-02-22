@@ -11,7 +11,6 @@ class Application(Console, HasState):
         'version': '1.0.0',
         'description': 'Helping you build command line applications',
         'interactive': False,
-        'env': 'dev'  # dev, prod
     }
 
     def __init__(self, config={}):
@@ -31,7 +30,15 @@ class Application(Console, HasState):
     def printUsageMenu(self):
 
         self.output().sectionWithList(
-            'Usage:', [f'python {self.state().get("script")} [option/command]'], '')
+            'Usage:', [f'python {self.state().get("script")} [option/command]'], ' ')
+
+    def printMainMenu(self):
+
+        self.printUsageMenu()
+
+        self.printOptionsMenu()
+
+        self.printCommandMenu()
 
     def run(self):
 
@@ -42,19 +49,15 @@ class Application(Console, HasState):
 
         else:
 
-            self.printUsageMenu()
+            # Need to check for default command
 
-            self.printOptionsMenu()
+            if self.state().get('config.interactive'):
 
-            self.printCommandMenu()
+                self.printMainMenu()
 
-        # When running the app, we need to
-        # - check if any args were passed
-        # - if they was
-        #   - we need to check if it matches any options
-        #   - we need to check if it matches any commands
-        # - else
-        #   - we need to see if there is a default command
+                command = self.input().ask('What command would you like to run?')
+
+                self.runCommand(command, self.state().get('args'))
 
     def __del__(self):
 
