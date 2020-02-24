@@ -2,11 +2,12 @@ import json
 
 
 class InventoryItem:
-    def __init__(self, itemName):
-        self.name = itemName
+
+    def __init__(self, name):
+        self.name = name
+        self.totalSlots = 0
         self.totalStocked = 0
         self.totalInStock = 0
-        self.totalSlots = 0
 
     def addToStocked(self, stockAmt):
         self.totalStocked = self.totalStocked + stockAmt
@@ -43,63 +44,100 @@ class MachineStatus:
     percentSold = None
 
 
+def choice1():
+    print('w')
+
+
+def choice2():
+    print('e')
+
+
 def main():
 
-    inventoryFileNames = ["REID_1F_20171004.json",
-                          "REID_2F_20171004.json", "REID_3F_20171004.json"]
+    options = {
+        'm': choice1,
+        'i': choice2
+    }
 
-    itemNameToInventoryItem = {}
+    message = '\n> Which you like to view the (m)achine report or the (i)nventory report? '
 
-    for inventoryFileName in inventoryFileNames:
+    choice = input(message)
 
-        inventoryFile = open(inventoryFileName, 'r')
+    while not choice in options:
 
-        inventoryData = json.loads(inventoryFile.read())
+        path = input(message)
 
-        contents = inventoryData['contents']
+    options[choice]()
 
-        # Good up to here
+    quit()
+
+    # List of source files
+    files = [
+        "../data/REID_1F_20171004.json",
+        "../data/REID_2F_20171004.json",
+        "../data/REID_3F_20171004.json",
+    ]
+
+    # Map of item names to item classes
+    items = {}
+
+    for source in files:
+
+        # Get the json from the source file
+        data = json.loads(open(source, 'r').read())
+
+        # Get the main content
+        contents = data['contents']
+
+        # Loop through the rows
         for row in contents:
 
+            # Loop through the slots in each row
             for slot in row['slots']:
 
-                itemName = slot['item_name']
+                # Get the name of the item in the slot
+                name = slot['item_name']
 
-                inventoryItem = itemNameToInventoryItem.get(
-                    itemName, InventoryItem(itemName))
+                # Set/update the item in the items list
+                item = items.get(name, InventoryItem(name))
 
-                inventoryItem.addToStocked(slot['last_stock'])
+                # Update item numbers
+                item.addToStocked(slot['last_stock'])
+                item.addToInStock(slot['current_stock'])
+                item.incrementSlots()
 
-                inventoryItem.addToInStock(slot['current_stock'])
+                # Update the item in the items list
+                items[name] = item
 
-                inventoryItem.incrementSlots()
+    # Set the initial sort
+    sort = ''
 
-                itemNameToInventoryItem[itemName] = inventoryItem
+    inventory = list(items.values())
 
-    cokeItem = itemNameToInventoryItem['Coke']
+    while sort != 'q':
 
-    sortChoice = ''
+        sort = input(
+            '\nSort by (n)ame, (p)ct sold, (s)tocking need, or (q) to quit: ')
 
-    inventoryItemsList = list(itemNameToInventoryItem.values())
+        if sort == 'n':
+            # Sort by name
+            inventory.sort(key=InventoryItem.getName)
+        elif sort == 'p':
+            # Sort by percent sold
+            inventory.sort(key=InventoryItem.getSoldPct)
+            inventory.reverse()
+        elif sort == 's':
+            # Sort by stock
+            inventory.sort(key=InventoryItem.getStockNeed)
+            inventory.reverse()
 
-    while sortChoice != 'q':
+        print('\nItem Name            Sold     % Sold     In Stock Stock needs')
 
-        sortChoice = input(
-            'Sort by (n)ame, (p)ct sold, (s)tocking need, or (q) to quit: ')
-
-        if sortChoice == 'n':
-            inventoryItemsList.sort(key=InventoryItem.getName)
-        elif sortChoice == 'p':
-            inventoryItemsList.sort(key=InventoryItem.getSoldPct)
-            inventoryItemsList.reverse()
-        elif sortChoice == 's':
-            inventoryItemsList.sort(key=InventoryItem.getStockNeed)
-            inventoryItemsList.reverse()
-
-        print('Item Name            Sold     % Sold     In Stock Stock needs')
-
-        for item in inventoryItemsList:
+        for item in inventory:
             print('{:20} {:8} {:8.2f}% {:8} {:8}'.format(item.getName(), item.getNumberSold(), item.getSoldPct() * 100, item.
                                                          getNumberInStock(), item.getStockNeed()))
 
         print()
+
+
+main()

@@ -1,3 +1,4 @@
+from .ReportChooser import ReportChooser
 from .PrintMachinesList import PrintMachinesList
 from .PrintMachinesReport import PrintMachinesReport
 from .ReadSourcesIntoState import ReadSourcesIntoState

@@ -53,11 +53,15 @@ class Output:
     def sectionWithList(self, title, options, prefix='- '):
         self.title(f'\n{title}')
 
-        for option in options:
-            self.line(f'{prefix}{option}')
+        if type(options) == list:
 
-    def table(self, headers, rows):
-        print('TODO')
+            for option in options:
+                self.line(f'{prefix}{option}')
+
+        elif type(options) == dict:
+
+            for key, desc in options.items():
+                self.line(f'{prefix}{self.formatLine("green", key)} {desc}')
 
     def typed(self, message, delay=0.1):
         for letter in message:

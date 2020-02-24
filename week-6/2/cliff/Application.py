@@ -47,6 +47,10 @@ class Application(Console, HasState):
             # There is arguments to validate and process
             self.processArguments(self.state().get('args'))
 
+        elif not self.defaultCommand == None:
+
+            self.defaultCommand(self).handle()
+
         else:
 
             # Need to check for default command

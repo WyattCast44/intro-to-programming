@@ -9,6 +9,7 @@ class Console:
     commands = {}
     optionsStack = []
     commandStack = []
+    defaultCommand = None
 
     def __init__(self):
         super(Console, self).__init__()
@@ -201,6 +202,12 @@ class Console:
         else:
             raise Exception(
                 f'Uknown format used to register commands. Type: {type(commands)}, Command(s): {commands}')
+
+        return self
+
+    def setDefaultCommand(self, command):
+
+        self.defaultCommand = command
 
         return self
 

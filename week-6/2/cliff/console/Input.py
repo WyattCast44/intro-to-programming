@@ -10,13 +10,13 @@ class Input(Output):
 
     def askWithOptions(self, question, options):
 
-        self.sectionWithOptions(question, options)
+        self.sectionWithList(question, options)
 
         given = input('\n> ')
 
         while not given in options:
             self.line(f'\nUnknown option \'{given}\', please try again.')
-            self.sectionWithOptions(question, options)
+            self.sectionWithList(question, options)
             given = input('\n> ')
 
         return given
