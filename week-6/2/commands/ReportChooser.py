@@ -1,3 +1,6 @@
+from .PrintInventoryReport import PrintInventoryReport
+
+
 class ReportChooser:
 
     signature = 'reports:choose'
@@ -28,6 +31,4 @@ class ReportChooser:
         if choice == 'm':
             print('\nrunning machines report')
         elif choice == 'i':
-            print('\nrunning inventory report')
-
-        # self.application.runUnregisteredCommand(Rea)
+            self.application.runUnregisteredCommand(PrintInventoryReport)

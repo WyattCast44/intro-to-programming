@@ -237,7 +237,7 @@ class Console:
     def runUnregisteredCommand(self, command):
 
         # Check if command is a class
-        if isinstance(command) == type:
+        if isinstance(command, type):
             command(self).handle()
             return
 
