@@ -52,8 +52,6 @@ class Machine:
 
         self.atts['slots'] = slots
 
-        print('id', self.atts['id'])
-
         return self
 
     ###
