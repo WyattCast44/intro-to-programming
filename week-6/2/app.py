@@ -1,18 +1,15 @@
 from cliff import Application
-from options import (Problem, Version)
-from commands import (PrintInventoryReport, PrintMachinesList,
-                      PrintMachinesReport, ReadSourcesIntoState, ReportChooser)
+from options import (Help)
+from commands import (ReportChooser)
 
 app = Application({
     'name': 'Vending Machine Inventory Management Tool',
     'description': 'A small tool to help keep track of your vending machine empire',
     'version': '1.2.0',
-    'interactive': True
 }).registerCommands([
     ReportChooser,
 ]).registerOptions([
-    Problem,
-    Version
+    Help
 ]).setDefaultCommand(ReportChooser)
 
 app.state().set('sources', [

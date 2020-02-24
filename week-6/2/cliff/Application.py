@@ -53,11 +53,9 @@ class Application(Console, HasState):
 
         else:
 
-            # Need to check for default command
+            self.printMainMenu()
 
             if self.state().get('config.interactive'):
-
-                self.printMainMenu()
 
                 command = self.input().ask('What command would you like to run?')
 
