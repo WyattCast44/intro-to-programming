@@ -1,4 +1,5 @@
 from models import InventoryItem, Machine
+from .LoadMachinesIntoState import LoadMachinesIntoState
 
 
 class PrintInventoryReport:
@@ -53,7 +54,9 @@ class PrintInventoryReport:
 
     def handle(self):
 
-        self.readMachinesIntoState()
+        # Ensure we load up the source files
+        self.application.runUnregisteredCommand(LoadMachinesIntoState)
+
         # self.parseMachinesData()
 
         # Set the initial sort

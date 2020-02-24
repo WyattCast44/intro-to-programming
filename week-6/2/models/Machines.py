@@ -1,6 +1,9 @@
+from models import Machine
+
+
 class Machines:
 
-    contents = None
+    items = []
 
     def __init__(self, sources=None):
 
@@ -20,5 +23,14 @@ class Machines:
 
         self.sources = sources
 
-        for path in self.sources:
-            print(path)
+        for source in sources:
+
+            machine = Machine().fromSource(source)
+
+            self.items.append(machine)
+
+        return self
+
+    def getMachines(self):
+
+        return self.items
