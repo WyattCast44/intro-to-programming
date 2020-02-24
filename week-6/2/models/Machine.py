@@ -18,11 +18,9 @@ class Machine:
 
     def parseContents(self):
 
-        fileObj = open(self.source, 'r')
+        jsonContents = json.loads(open(self.source, 'r').read())
 
-        jsonContents = json.loads(fileObj.read())
-
-        fileObj.close()
+        self.atts['json'] = jsonContents
 
         # Grab the id
         self.atts['id'] = jsonContents['machine_id']
