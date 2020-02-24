@@ -12,6 +12,7 @@ class LoadMachinesIntoState:
 
     def handle(self):
 
-        machines = Machines().loadSources(self.application.state().get('sources'))
+        machines = Machines().loadSources(
+            self.application.state().get('sources'))
 
         self.application.state().set('machines', machines)

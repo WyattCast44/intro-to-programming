@@ -20,14 +20,6 @@ class ReportChooser:
         choice = self.application.input().askWithOptions(
             'Please choose which report you would like to view:', options)
 
-        # choice = self.application.input().ask(
-        #     'Which you like to view the (m)achine report or the (i)nventory report?')
-
-        while not choice in options:
-
-            choice = self.application.input().askWithOptions(
-                'Please choose which report you would like to view:', options)
-
         if choice == 'm':
             print('\nrunning machines report')
         elif choice == 'i':

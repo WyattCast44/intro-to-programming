@@ -3,62 +3,117 @@ import json
 
 class Machine:
 
-    attributes = {}
+    MAX_ITEMS_PER_SLOT = 8
 
-    source, rawContents, jsonContents = None, None, None
+    def __init__(self):
+        self.atts = {}
 
     def fromSource(self, path):
+
         self.source = path
 
-        self.loadSource().parseContents()
-
-        return self
-
-    def loadSource(self):
-        # Read the file into memory
-        self.rawContents = open(self.source, 'r').read()
+        self.parseContents()
 
         return self
 
     def parseContents(self):
 
-        # Get the raw json
-        self.jsonContents = json.loads(self.rawContents)
+        fileObj = open(self.source, 'r')
+
+        jsonContents = json.loads(fileObj.read())
+
+        fileObj.close()
 
         # Grab the id
-        self.attributes['id'] = self.jsonContents['machine_id']
+        self.atts['id'] = jsonContents['machine_id']
 
         # Grab the name
-        self.attributes['name'] = self.jsonContents['machine_label']
+        self.atts['name'] = jsonContents['machine_label']
 
         # Grab the content
-        self.attributes['contents'] = self.jsonContents['contents']
+        self.atts['contents'] = jsonContents['contents']
 
-        # Set the initial row count
-        self.attributes['rowCount'] = 0
+        # Grab the rows
+        rows = []
 
-        for row in self.attributes['contents']:
+        for row in self.atts['contents']:
 
-            self.incrementRowCount()
+            rows.append(row)
+
+        self.atts['rows'] = rows
+
+        slots = []
+
+        for row in rows:
 
             for slot in row['slots']:
-                # each row has 9 slots
-                p = 1
 
-        # Need to parse the rows
-        # in the rows, need to parse the slots
-        # in the slots, need to parse the
-        # - item name
-        # - last stock
-        # - current stock
-        # Machine need to know how many slots it has
+                slots.append(slot)
+
+        self.atts['slots'] = slots
+
+        print('id', self.atts['id'])
 
         return self
 
-    def incrementRowCount(self):
+    ###
+    # Machine Details
+    ###
+    def getId(self):
 
-        self.attributes['rowCount'] = self.attributes['rowCount'] + 1
+        return self.atts['id']
 
-    # def __del__(self):
+    def getName(self):
 
-    #     print(self.attributes["id"], self.attributes["name"])
+        return self.atts['name']
+
+    def getTotalCapacity(self):
+
+        return self.getSlotsCount() * self.MAX_ITEMS_PER_SLOT
+
+    ###
+    # Contents
+    ##
+    def getContents(self):
+
+        return self.atts['contents']
+
+    ###
+    # Rows
+    ###
+    def getRows(self):
+
+        return self.atts['rows']
+
+    def getRowsCount(self):
+
+        return len(self.atts['rows'])
+
+    ###
+    # Slots
+    ###
+    def getSlots(self):
+
+        return self.atts['slots']
+
+    def getSlotsCount(self):
+
+        return len(self.atts['slots'])
+
+    ###
+    # Analysis
+    ###
+    def getPercentSold(self):
+
+        totalCapacity = self.getTotalCapacity()
+
+        inStockCount = 0
+
+        for slot in self.getSlots():
+
+            inStockCount = inStockCount + slot['current_stock']
+
+        return inStockCount
+
+    def getTotalSales(self):
+        return

@@ -3,31 +3,27 @@ from models import Machine
 
 class Machines:
 
-    items = []
+    def __init__(self):
 
-    def __init__(self, sources=None):
+        self.items = []
 
-        self.sources = sources
-
-        if not sources == None:
-
-            self.loadSources()
+        return
 
     def loadSources(self, sources=None):
 
-        if sources == None and self.sources == None:
+        if sources == None:
             raise Exception(
                 "You must pass the path(s) to the source files to create the machines object.")
 
             return
 
-        self.sources = sources
+        machineObjs = []
 
         for source in sources:
 
             machine = Machine().fromSource(source)
 
-            self.items.append(machine)
+            machineObjs.append(machine)
 
         return self
 

@@ -19,8 +19,4 @@ app.state().set('sources', [
     app.state().get("cwd") + '/data/REID_3F_20171004.json',
 ])
 
-# machiness = Machines().loadSources(app.state().get('sources'))
-
-# print(machiness, machiness.getMachines())
-
 app.run()
