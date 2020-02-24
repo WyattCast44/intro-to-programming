@@ -25,4 +25,9 @@ class ReportChooser:
             choice = self.application.input().askWithOptions(
                 'Please choose which report you would like to view:', options)
 
-        print('\n')
+        if choice == 'm':
+            print('\nrunning machines report')
+        elif choice == 'i':
+            print('\nrunning inventory report')
+
+        # self.application.runUnregisteredCommand(Rea)

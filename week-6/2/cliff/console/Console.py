@@ -234,6 +234,23 @@ class Console:
         else:
             raise Exception(f'Unknown command: {command}')
 
+    def runUnregisteredCommand(self, command):
+
+        # Check if command is a class
+        if isinstance(command) == type:
+            command(self).handle()
+            return
+
+        # Check if command is a function
+        elif callable(command):
+            command(self)
+            return
+
+        # Unknown handler type
+        else:
+            raise Exception(
+                f'Unable to run unregistered command. Handler: {command}')
+
     def printCommandMenu(self):
 
         commands = []
