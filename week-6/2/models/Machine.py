@@ -99,6 +99,71 @@ class Machine:
         return len(self.atts['slots'])
 
     ###
+    # Items
+    ###
+    def getUniqueItems(self):
+
+        items = []
+
+        for slot in self.getSlots():
+
+            name = slot['item_name']
+
+            if not name in items:
+
+                items.append(name)
+
+        return items
+
+    def getItemInStockCount(self, itemName):
+
+        stock = 0
+
+        for slot in self.getSlots():
+
+            if itemName == slot['item_name']:
+
+                stock = stock + slot['current_stock']
+
+        return stock
+
+    def getItemLastStockCount(self, itemName):
+
+        stock = 0
+
+        for slot in self.getSlots():
+
+            if itemName == slot['item_name']:
+
+                stock = stock + slot['last_stock']
+
+        return stock
+
+    def getItemTotalCapacity(self, itemName):
+
+        capacity = 0
+
+        for slot in self.getSlots():
+
+            if itemName == slot['item_name']:
+
+                capacity = capacity + self.MAX_ITEMS_PER_SLOT
+
+        return capacity
+
+    def containsItem(self, itemName):
+
+        status = False
+
+        for slot in self.getSlots():
+
+            if itemName == slot['item_name']:
+
+                status = True
+
+        return status
+
+    ###
     # Analysis
     ###
     def getPercentSold(self):
@@ -111,7 +176,16 @@ class Machine:
 
             inStockCount = inStockCount + slot['current_stock']
 
-        return inStockCount
+        return round((inStockCount/totalCapacity * 100), 2)
 
     def getTotalSales(self):
-        return
+
+        total = 0
+
+        for slot in self.getSlots():
+
+            numberSoldInSlot = slot['last_stock'] - slot['current_stock']
+
+            total = total + (numberSoldInSlot * slot['item_price'])
+
+        return round(total, 2)

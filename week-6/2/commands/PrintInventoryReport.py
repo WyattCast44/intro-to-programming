@@ -1,10 +1,9 @@
-from models import InventoryItem, Machine
+import json
+from models import InventoryItem
 from .LoadMachinesIntoState import LoadMachinesIntoState
 
 
 class PrintInventoryReport:
-
-    items = {}
 
     signature = 'print:inventory-report'
 
@@ -15,12 +14,63 @@ class PrintInventoryReport:
 
     def handle(self):
 
-        # Ensure we load up the source files
-        self.application.runUnregisteredCommand(LoadMachinesIntoState)
+        # Map of item names to item classes
+        items = {}
 
-        machines = self.application.state().get('machines')
+        for source in self.application.state().get('sources'):
 
-        # Loop through each machine and get the data
-        for machine in machines.getMachines():
+            # Get the json from the source file
+            data = json.loads(open(source, 'r').read())
 
-            print(type(item), item.getId())
+            # Get the main content
+            contents = data['contents']
+
+            # Loop through the rows
+            for row in contents:
+
+                # Loop through the slots in each row
+                for slot in row['slots']:
+
+                    # Get the name of the item in the slot
+                    name = slot['item_name']
+
+                    # Set/update the item in the items list
+                    item = items.get(name, InventoryItem(name))
+
+                    # Update item numbers
+                    item.addToStocked(slot['last_stock'])
+                    item.addToInStock(slot['current_stock'])
+                    item.incrementSlots()
+
+                    # Update the item in the items list
+                    items[name] = item
+
+        # Set the initial sort
+        sort = ''
+
+        inventory = list(items.values())
+
+        while sort != 'q':
+
+            sort = input(
+                '\nSort by (n)ame, (p)ct sold, (s)tocking need, or (q) to quit: ')
+
+            if sort == 'n':
+                # Sort by name
+                inventory.sort(key=InventoryItem.getName)
+            elif sort == 'p':
+                # Sort by percent sold
+                inventory.sort(key=InventoryItem.getSoldPct)
+                inventory.reverse()
+            elif sort == 's':
+                # Sort by stock
+                inventory.sort(key=InventoryItem.getStockNeed)
+                inventory.reverse()
+
+            print('\nItem Name            Sold     % Sold     In Stock Stock needs')
+
+            for item in inventory:
+                print('{:20} {:8} {:8.2f}% {:8} {:8}'.format(item.getName(), item.getNumberSold(), item.getSoldPct() * 100, item.
+                                                             getNumberInStock(), item.getStockNeed()))
+
+            print()

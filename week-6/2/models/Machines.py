@@ -17,16 +17,10 @@ class Machines:
 
             return
 
-        machineObjs = []
-
         for source in sources:
 
             machine = Machine().fromSource(source)
 
-            machineObjs.append(machine)
-
-        return self
-
-    def getMachines(self):
+            self.items.append(machine)
 
         return self.items

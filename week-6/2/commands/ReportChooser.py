@@ -1,4 +1,5 @@
 from .PrintInventoryReport import PrintInventoryReport
+from .PrintMachinesReport import PrintMachinesReport
 
 
 class ReportChooser:
@@ -21,6 +22,6 @@ class ReportChooser:
             'Please choose which report you would like to view:', options)
 
         if choice == 'm':
-            print('\nrunning machines report')
+            self.application.runUnregisteredCommand(PrintMachinesReport)
         elif choice == 'i':
             self.application.runUnregisteredCommand(PrintInventoryReport)

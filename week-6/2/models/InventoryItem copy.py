@@ -39,23 +39,6 @@ class InventoryItem:
 
 def main():
 
-    options = {
-        'm': choice1,
-        'i': choice2
-    }
-
-    message = '\n> Which you like to view the (m)achine report or the (i)nventory report? '
-
-    choice = input(message)
-
-    while not choice in options:
-
-        path = input(message)
-
-    options[choice]()
-
-    quit()
-
     # List of source files
     files = [
         "../data/REID_1F_20171004.json",
@@ -98,6 +81,10 @@ def main():
     sort = ''
 
     inventory = list(items.values())
+
+    print(inventory)
+
+    quit()
 
     while sort != 'q':
 
