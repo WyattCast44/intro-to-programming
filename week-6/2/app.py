@@ -1,7 +1,6 @@
+from options import Help
 from cliff import Application
-from options import (Help)
-from commands import (ReportChooser)
-from models import Machines
+from commands import ReportChooser
 
 app = Application({
     'name': 'Vending Machine Inventory Management Tool',
