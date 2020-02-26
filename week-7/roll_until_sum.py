@@ -1,6 +1,10 @@
 from random import randint
 
 
+def rollDice(sides=6):
+    return randint(1, sides)
+
+
 def main():
 
     DICE_SIDES = 6
@@ -42,10 +46,6 @@ def main():
 
     # Print the total number of rolls
     print(f'\nGot it in {len(attempts)} attempts!')
-
-
-def rollDice(sides=6):
-    return randint(1, sides)
 
 
 main()

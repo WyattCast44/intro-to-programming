@@ -6,7 +6,7 @@ Wyatt Castaneda
 SWDV 600: INTRO TO PROGRAMMING
 """
 
-# Problem 
+# Problem
 
 """
 You have been contracted by a golf training company in need of a new golf club recommendation app for their clients.
@@ -38,17 +38,21 @@ I recommend using your 9-Iron
 
 # Solution
 
-from helpers import *
 
+
+
+from helpers import *
 def isBallOnGreen():
     print('\nIs the ball currently on the green?\n')
     print("Enter 'y' for yes...")
     print("Enter 'n' for no...\n")
     return input('> ')
 
+
 def promptUserForDistanceToHole():
     print('\nHow far is the ball from the hole? (yards)\n')
     return float(input('> '))
+
 
 def determineBestClub(distanceToHole):
     if distanceToHole >= 200:
@@ -59,6 +63,7 @@ def determineBestClub(distanceToHole):
         return '9-Iron'
     else:
         return 'Pitching Wedge'
+
 
 def main():
     print(success('\nWelcome to the Golf Club Helper! ⛳'))
@@ -72,5 +77,6 @@ def main():
     distance = promptUserForDistanceToHole()
     club = determineBestClub(distance)
     print(f'\nI recommend using your {club} 🏌️')
+
 
 main()

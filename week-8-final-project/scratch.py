@@ -2,14 +2,17 @@ import os
 import sys
 import time
 
+
 def clearConsole():
     try:
         os.system('clear')
     except:
         os.system('cls')
 
+
 def sleep(seconds):
     time.sleep(seconds)
+
 
 def main():
     consoleWidth = 50
@@ -44,3 +47,6 @@ def main():
         sleep(0.065)
         sys.stdout.write(letter)
         sys.stdout.flush()
+
+
+main()
