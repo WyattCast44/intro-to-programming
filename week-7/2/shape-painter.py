@@ -1,4 +1,4 @@
-from graphics import *
+from src.graphics import *
 
 
 def getColor(colorString):
@@ -73,6 +73,8 @@ def drawShapes(shapes):
 
     for shape in shapes:
         shape.draw(win)
+
+    win.getMouse()
 
 
 def main():
