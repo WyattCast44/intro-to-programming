@@ -1,6 +1,6 @@
 import random
-from CircleFactory import CircleFactory
-from RectangleFactory import RectangleFactory
+from .CircleFactory import CircleFactory
+from .RectangleFactory import RectangleFactory
 
 
 class ShapeGenerator:

@@ -1,19 +1,20 @@
-from ShapeFactory import ShapeFactory
-from random import randint, choice
+import random
+from .ShapeFactory import ShapeFactory
 
 
 class CircleFactory(ShapeFactory):
 
-    def __init__(self):
+    def __init__(self, bounds=[500, 500]):
         self.color = None
         self.radius = None
+        self.bounds = bounds
         self.centerPoint = None
         return
 
     def setColor(self):
 
-        if randint(0, 1):
-            self.color = choice(self.colors)
+        if random.randint(0, 1):
+            self.color = random.choice(self.colors)
         else:
             self.color = self.defaultColor
 
@@ -21,9 +22,13 @@ class CircleFactory(ShapeFactory):
 
     def setCenterPoint(self):
 
+        self.centerPoint = f'{random.randint(0, self.bounds[0])}, {random.randint(0, self.bounds[0])}'
+
         return self
 
     def setRadius(self):
+
+        self.radius = f'{random.randint(0, self.bounds[0]/2)}'
 
         return self
 

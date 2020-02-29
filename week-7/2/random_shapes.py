@@ -1,4 +1,4 @@
-from ShapeGenerator import ShapeGenerator
+from src.ShapeGenerator import ShapeGenerator
 
 
 def main():
@@ -25,7 +25,7 @@ def main():
 
         current = current + 1
 
-    f = open("myfile.txt", "w")
+    f = open(fileName, "w")
 
     for line in lines:
 
