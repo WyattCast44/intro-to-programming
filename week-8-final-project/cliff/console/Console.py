@@ -1,3 +1,4 @@
+import os
 import sys
 from .Input import Input
 from .Output import Output
@@ -21,6 +22,12 @@ class Console:
 
     def output(self):
         return Output()
+
+    def clearConsole(self):
+        try:
+            os.system('clear')
+        except:
+            os.system('cls')
 
     ##
     # CLI
