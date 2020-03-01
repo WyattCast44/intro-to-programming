@@ -168,7 +168,7 @@ class Console:
 
         for key, option in self.options.items():
 
-            options.append(self.output().formatLine(
+            options.append(self.output().format(
                 'green', option.signature) + f" {option.description}")
 
         self.output().sectionWithList('Options:', options, '')
@@ -260,7 +260,7 @@ class Console:
 
         for key, command in self.commands.items():
 
-            commands.append(self.output().formatLine(
+            commands.append(self.output().format(
                 'green', command.signature) + f" {command.description}")
 
         self.output().sectionWithList('Commands:', commands, '')

@@ -1,8 +1,9 @@
+from tinydb import TinyDB
 from cliff import Application
 from cliff.commands import MakeCommand
 
 # Init the database
-# db = TinyDB('db.json')
+db = TinyDB('db.json')
 
 Application({
     'name': 'Final Project',
