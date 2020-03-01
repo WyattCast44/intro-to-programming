@@ -161,6 +161,9 @@ class Console:
 
     def printOptionsMenu(self):
 
+        if len(self.options) == 0:
+            return
+
         options = []
 
         for key, option in self.options.items():

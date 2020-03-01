@@ -27,12 +27,20 @@ class Application(Console, HasState):
         self.state().set('args', sys.argv[1:])
         self.state().append('config', 'start', Time.now())
 
+    def printProgramName(self):
+
+        self.output().sectionWithList(self.state().get('config.name'), [
+            self.state().get('config.description')
+        ], '')
+
     def printUsageMenu(self):
 
         self.output().sectionWithList(
             'Usage:', [f'python {self.state().get("script")} [option/command]'], ' ')
 
     def printMainMenu(self):
+
+        self.printProgramName()
 
         self.printUsageMenu()
 
