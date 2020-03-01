@@ -1,3 +1,6 @@
+from src.shape_painter import *
+
+
 class DrawShapeFile:
 
     signature = "draw:shapefile"
@@ -12,3 +15,9 @@ class DrawShapeFile:
 
         self.filename = self.application.input().ask(
             'What shapefile would you like to use?')
+
+        shapefile = open(self.filename)
+
+        shapes = getShapes(shapefile)
+
+        drawShapes(shapes)

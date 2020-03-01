@@ -75,20 +75,3 @@ def drawShapes(shapes):
         shape.draw(win)
 
     win.getMouse()
-
-
-def main():
-    # get file name
-    fileName = input("Enter the drawing file name: ")
-
-    # open the file
-    drawingFile = open(fileName, 'r')
-
-    # get the shapes
-    shapes = getShapes(drawingFile)
-
-    # draw the shapes
-    drawShapes(shapes)
-
-
-main()

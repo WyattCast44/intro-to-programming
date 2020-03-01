@@ -48,3 +48,14 @@ class GenerateShapeFile:
         Filesystem.writeLines(self.filename, self.shapes)
 
         self.application.output().success('\nShape file created successfully!')
+
+        status = self.application.input().askWithOptions(
+            'Would you like to run the `draw:shapefile` command now?', {
+                'y': 'Enter `y` to run the command',
+                'n': 'Or `n` to quit'
+            })
+
+        if status == 'y':
+            self.application.runCommand('draw:shapefile')
+        else:
+            return
