@@ -1,5 +1,5 @@
-from tinydb import TinyDB
 from cliff import Application
+from tinydb import TinyDB, Query, where
 from cliff.commands import MakeCommand
 from commands import ResumeGame, StartNewGame, ShowCredits
 
@@ -18,5 +18,7 @@ app = Application({
 ])
 
 app.state().set('db', db)
+
+app.state().get('db').update({'name': 'Wyatt'}, where('name') == 'James')
 
 app.run()
