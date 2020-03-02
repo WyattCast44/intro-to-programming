@@ -6,5 +6,7 @@ class Item:
         self.description = properties['desc']
         self.abilites = properties['abilities']
 
+        return
+
     def __str__(self):
         return f'\nName: {self.name}\nDescription: {self.description}\nAbilites: {self.abilites}'
