@@ -3,7 +3,6 @@ from tinydb import TinyDB, Query, where
 from cliff.commands import MakeCommand
 from commands import ResumeGame, StartNewGame, ShowCredits
 
-# Init the database
 db = TinyDB('db.json')
 
 app = Application({
@@ -18,7 +17,5 @@ app = Application({
 ])
 
 app.state().set('db', db)
-
-app.state().get('db').update({'name': 'Wyatt'}, where('name') == 'James')
 
 app.run()
