@@ -1,3 +1,4 @@
+
 class StartNewGame:
 
     signature = "new:game"
@@ -9,4 +10,12 @@ class StartNewGame:
         return
 
     def handle(self):
-        self.application.output().error('\nTODO\n')
+        self.application.clearConsole()
+
+        self.printFirstParagraph()
+
+    def printFirstParagraph(self):
+
+        from app.Spellbook import Spellbook
+
+        Spellbook(self.application).read()
