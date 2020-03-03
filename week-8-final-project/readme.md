@@ -40,3 +40,14 @@ Intro: ?e
 "You turn the corner and see more impossibly tall walls of the maze..."
 
 - Have a spellbook that lists common spells and thier uses
+
+StartGame
+    - Go to first step in map
+
+Step
+    choices = {
+        'north' = 
+        'east'
+        'west'
+        'south'
+    }

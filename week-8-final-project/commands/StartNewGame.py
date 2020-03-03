@@ -1,3 +1,5 @@
+import random
+
 
 class StartNewGame:
 
@@ -16,6 +18,8 @@ class StartNewGame:
 
     def printFirstParagraph(self):
 
-        from app.Spellbook import Spellbook
-
-        Spellbook(self.application).read()
+        if random.randint(0, 1):
+            print('I am still running')
+        else:
+            print('We are in the endgame now')
+            self.application.state().update('game_running', False)

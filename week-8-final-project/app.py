@@ -18,4 +18,10 @@ app = Application({
 
 app.state().set('db', db)
 
-app.run()
+# Start the game loop
+app.state().set('game_running', True)
+
+# Run the app until the game ends
+while app.state().get('game_running'):
+
+    app.run()
