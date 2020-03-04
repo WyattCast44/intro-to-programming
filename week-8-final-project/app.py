@@ -18,10 +18,7 @@ app = Application({
 
 app.state().set('db', db)
 
-# Start the game loop
-app.state().set('game_running', True)
-
 # Run the app until the game ends
-while app.state().get('game_running'):
+while not app.state().get('game_over', False):
 
     app.run()

@@ -22,4 +22,4 @@ class StartNewGame:
             print('I am still running')
         else:
             print('We are in the endgame now')
-            self.application.state().update('game_running', False)
+            self.application.state().upsert('game_over', True)
