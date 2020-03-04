@@ -19,7 +19,7 @@ class StartNewGame:
     def printFirstParagraph(self):
 
         if random.randint(0, 1):
-            print('I am still running')
+            print('\nI am still running\n')
         else:
-            print('We are in the endgame now')
+            print('\nWe are in the endgame now\n')
             self.application.state().upsert('game_over', True)
