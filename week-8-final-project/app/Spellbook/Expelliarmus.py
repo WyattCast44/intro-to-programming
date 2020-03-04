@@ -1,4 +1,4 @@
-from app.Spell import Spell
+from .Spell import Spell
 
 
 class Expelliarmus(Spell):
@@ -15,6 +15,6 @@ class Expelliarmus(Spell):
         status = player.attemptToRemoveWand()
 
         if status:
-            # success
+            print('he')
         else:
-            # nope
+            print('ww')

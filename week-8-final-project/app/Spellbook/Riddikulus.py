@@ -1,4 +1,4 @@
-from app.Spell import Spell
+from .Spell import Spell
 
 
 class Riddikulus(Spell):

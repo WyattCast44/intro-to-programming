@@ -1,4 +1,4 @@
-import random
+from app import Game
 
 
 class StartNewGame:
@@ -8,18 +8,15 @@ class StartNewGame:
     description = "Start a new game"
 
     def __init__(self, application):
+
         self.application = application
+
         return
 
     def handle(self):
+
+        # Let start by clearing the console
         self.application.clearConsole()
 
-        self.printFirstParagraph()
-
-    def printFirstParagraph(self):
-
-        if random.randint(0, 1):
-            print('\nI am still running\n')
-        else:
-            print('\nWe are in the endgame now\n')
-            self.application.state().upsert('game_over', True)
+        # Lets now start and run the game
+        game = Game(self.application).start().run()

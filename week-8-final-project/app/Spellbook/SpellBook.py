@@ -1,6 +1,6 @@
-from app.Stupify import Stupify
-from app.Riddikulus import Riddikulus
-from app.Expelliarmus import Expelliarmus
+from .Stupify import Stupify
+from .Riddikulus import Riddikulus
+from .Expelliarmus import Expelliarmus
 
 
 class SpellBook:
@@ -22,6 +22,8 @@ class SpellBook:
         items = []
 
         for spell in self.spells:
+
+            spell = spell()
 
             incantation = self.application.output().format('green', spell.incantation)
 

@@ -1,1 +1,1 @@
-from Spellbook import Spellbook
+from .Game import Game

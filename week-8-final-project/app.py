@@ -1,7 +1,7 @@
 from cliff import Application
 from tinydb import TinyDB, Query, where
 from cliff.commands import MakeCommand
-from commands import ResumeGame, StartNewGame, ShowCredits
+from commands import ResumeGame, StartNewGame, ShowCredits, ShowSpellbook
 
 db = TinyDB('db.json')
 
@@ -12,13 +12,9 @@ app = Application({
     'interactive': True
 }).registerCommands([
     StartNewGame,
-    ResumeGame,
     ShowCredits
 ])
 
 app.state().set('db', db)
 
-# Run the app until the game ends
-while not app.state().get('game_over', False):
-
-    app.run()
+app.run()

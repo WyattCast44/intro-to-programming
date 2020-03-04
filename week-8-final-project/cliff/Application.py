@@ -30,7 +30,7 @@ class Application(Console, HasState):
     def printProgramName(self):
 
         self.output().title(f"\n{self.state().get('config.name')}")
-        self.output().info(self.state().get('config.description'))
+        self.output().line(self.state().get('config.description'))
 
     def printUsageMenu(self):
 
