@@ -1,7 +1,7 @@
 from time import sleep
 
 
-class GameIntro:
+class Intro:
 
     intro = """
         The date is February 6, in the year 2018. Your mind is racing... you check your seat harness for 
@@ -43,9 +43,5 @@ class GameIntro:
         self.application.output().typed(self.intro, 0.06)
 
         self.application.state().upsert('next_step')
-
-        sleep(5)
-
-        self.game.end()
 
         return

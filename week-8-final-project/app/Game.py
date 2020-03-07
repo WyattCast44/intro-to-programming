@@ -1,5 +1,5 @@
 from time import time
-from .GameIntro import GameIntro
+from app.Steps import Intro
 
 
 class Game:
@@ -45,7 +45,7 @@ class Game:
         self.application.output().success(self.banner)
 
         # Set the next step
-        self.application.state().upsert('next_step', GameIntro)
+        self.application.state().upsert('next_step', Intro)
 
         # Run the game until game over
         while not self.application.state().get('game_over', False):
