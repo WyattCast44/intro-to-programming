@@ -1,7 +1,7 @@
 from .Item import Item
 
 
-class InvisibilityCloak(Item):
+class Star(Item):
 
     def __init__(self):
 

@@ -1,7 +1,7 @@
 from cliff import Application
 from tinydb import TinyDB, Query, where
 from cliff.commands import MakeCommand
-from commands import ResumeGame, StartNewGame, ShowCredits, ShowSpellbook
+from commands import ResumeGame, StartNewGame, ShowCredits
 
 db = TinyDB('db.json')
 

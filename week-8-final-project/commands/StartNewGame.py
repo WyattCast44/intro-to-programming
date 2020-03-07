@@ -19,4 +19,4 @@ class StartNewGame:
         self.application.clearConsole()
 
         # Lets now start and run the game
-        game = Game(self.application).start().run()
+        game = Game(self.application).run()
