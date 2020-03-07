@@ -1,4 +1,5 @@
 from time import sleep
+from .Orbit import Orbit
 
 
 class Intro:
@@ -42,6 +43,6 @@ class Intro:
 
         self.application.output().typed(self.intro, 0.06)
 
-        self.application.state().upsert('next_step')
+        self.application.state().upsert('next_step', Orbit)
 
         return

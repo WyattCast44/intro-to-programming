@@ -4,9 +4,7 @@ from time import sleep
 class Orbit:
 
     intro = """
-        
         You are now in orbit
-
         """
 
     def __init__(self, application, game):
