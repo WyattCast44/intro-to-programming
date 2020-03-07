@@ -14,27 +14,68 @@ class Game:
 
         self.application.state().upsert('game_start', time())
 
-        banner = """
-                     _   _   _   _   _   _     _   _  
-                    / \ / \ / \ / \ / \ / \   / \ / \ 
-                   ( P | L | A | N | E | T ) ( 4 | 2 )
-                    \_/ \_/ \_/ \_/ \_/ \_/   \_/ \_/ 
+        self.application.clearConsole()
 
-        =========================================================
+        banner = """
+                            
+        ████████╗██╗  ██╗███████╗                                                                                     
+        ╚══██╔══╝██║  ██║██╔════╝                                                                                     
+           ██║   ███████║█████╗                                                                                       
+           ██║   ██╔══██║██╔══╝                                                                                       
+           ██║   ██║  ██║███████╗                                                                                     
+           ╚═╝   ╚═╝  ╚═╝╚══════╝                                                                                     
+         █████╗ ██████╗ ██╗   ██╗███████╗███╗   ██╗████████╗██╗   ██╗██████╗ ███████╗███████╗     ██████╗ ███████╗    
+        ██╔══██╗██╔══██╗██║   ██║██╔════╝████╗  ██║╚══██╔══╝██║   ██║██╔══██╗██╔════╝██╔════╝    ██╔═══██╗██╔════╝    
+        ███████║██║  ██║██║   ██║█████╗  ██╔██╗ ██║   ██║   ██║   ██║██████╔╝█████╗  ███████╗    ██║   ██║█████╗      
+        ██╔══██║██║  ██║╚██╗ ██╔╝██╔══╝  ██║╚██╗██║   ██║   ██║   ██║██╔══██╗██╔══╝  ╚════██║    ██║   ██║██╔══╝      
+        ██║  ██║██████╔╝ ╚████╔╝ ███████╗██║ ╚████║   ██║   ╚██████╔╝██║  ██║███████╗███████║    ╚██████╔╝██║         
+        ╚═╝  ╚═╝╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═══╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝     ╚═════╝ ╚═╝         
+        ███████╗████████╗ █████╗ ██████╗ ███╗   ███╗ █████╗ ███╗   ██╗                                                
+        ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗████╗ ████║██╔══██╗████╗  ██║                                                
+        ███████╗   ██║   ███████║██████╔╝██╔████╔██║███████║██╔██╗ ██║                                                
+        ╚════██║   ██║   ██╔══██║██╔══██╗██║╚██╔╝██║██╔══██║██║╚██╗██║                                                
+        ███████║   ██║   ██║  ██║██║  ██║██║ ╚═╝ ██║██║  ██║██║ ╚████║                                                
+        ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝                                                
+                                         
         """
 
         intro = """
-        Planet 43, err... I mean 42 is a medium sized rocky planet, 
-        orbiting proxima minor in the rishi maze quadrant of the Blue Moon 
-        Galaxy. It's been said, 'If there was a bright center of the 
-        universe, it's the furthest planet from it'. It is frequented by 
-        smugglers and bounty hunters.
+        The date is February 6, in the year 2018. Your mind is racing... you check your seat harness for 
+        what seems like the hundredth time. You can't help but think that either way history is in the making.
+
+        Mission Control: 
+            Falcon Heavy is configured for flight. T-Minus 25 seconds. Starman confirm go for launch.
+
+        You: 
+            Starman is GO for launch. 
+
+        Mission Control:
+            Copy, Starman. Standby final countdown. 
+
+        Mission Control:
+
+            10...
+            9...
+            8...
+            7...
+            6...
+            5...
+            4...
+            3...
+            2...
+            1...
+
+        """
+
+        other = """
+        Humanity will once again leave Earth's gravity well.
         """
 
         self.application.output().success(banner)
+
         self.application.output().typed(intro, 0.06)
 
-        sleep(20)
+        sleep(5)
 
         return self
 
@@ -57,13 +98,6 @@ class Game:
 
         self.application.state().upsert('game_over', True)
 
+        quit()
+
         return
-
-    # def printFirstParagraph(self):
-
-    #     if random.randint(0, 1):
-    #         print('\nI am still running\n')
-    #     else:
-    #         print('\nWe are in the endgame now\n')
-    #         SpellBook(self.application).read()
-    #         self.application.state().upsert('game_over', True)

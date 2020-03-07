@@ -50,4 +50,4 @@ Step
         'east'
         'west'
         'south'
-    }
+    }   
