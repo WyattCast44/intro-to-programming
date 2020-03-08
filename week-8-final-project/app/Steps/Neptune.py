@@ -1,11 +1,4 @@
-from time import sleep
-
-
-class Orbit:
-
-    intro = """
-        You are now in orbit
-        """
+class Neptune:
 
     def __init__(self, application, game):
 
@@ -16,7 +9,7 @@ class Orbit:
 
     def run(self):
 
-        self.application.output().typed(self.intro, 0.06)
+        print('neptune')
 
         self.game.end()
 
