@@ -8,4 +8,4 @@ Application({
     'interactive': True
 }).registerCommands([
     StartNewGame
-]).run()
+]).setDefaultCommand(StartNewGame).run()

@@ -63,8 +63,12 @@ class Output:
             for key, desc in options.items():
                 self.line(f'{prefix}{self.format("green", key)} {desc}')
 
-    def typed(self, message, delay=0.1):
+    def typed(self, message, delay=0.1, color=None):
         for letter in message:
             time.sleep(delay)
+
+            if not color == None:
+                letter = self.format(color, letter)
+
             sys.stdout.write(letter)
             sys.stdout.flush()
