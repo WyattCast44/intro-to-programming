@@ -22,7 +22,7 @@ class Moon:
 
         self.application.output().typed(message, 0.055)
 
-        astroids = random.randint(0, 1)
+        astroids = False  # random.randint(0, 1)
 
         if astroids:
 
@@ -35,14 +35,27 @@ class Moon:
 
             self.application.output().error(message)
 
-            sleep(4)
-
             option = self.application.input().askWithOptions('Quick, what are you going to do?!', [
                 'turn-around',
                 'push-thru',
             ])
 
-            print(option)
+        else:
+
+            amount = random.randint(0, 10)
+
+            self.application.state().upsert(
+                'stardust_amount', self.application.state().get('stardust_amount') + amount)
+
+            totalAmount = self.application.state().get('stardust_amount')
+
+            message = """
+            As you get closer you see a hazy belt hovering around the moon. STARDUST! 
+            You gathered [AMT] units of STARDUST! Great job, you now have 
+            [TOTAL] units! Let's keep searching...
+            """.replace('[AMT]', str(amount)).replace('[TOTAL]', str(totalAmount))
+
+            self.application.output().success(message)
 
         self.game.end()
 

@@ -49,6 +49,12 @@ class Game:
         # Capture the start time
         self.application.state().upsert('game_start', time())
 
+        # Set the base stardust amount
+        self.application.state().set('stardust_amount', 0)
+
+        # Set the base ship health
+        self.application.state().set('health', 100)
+
         # Clear the console
         self.application.clearConsole()
 
@@ -76,6 +82,9 @@ class Game:
         self.application.state().upsert('game_over', True)
 
         self.application.output().error(self.outro)
+
+        self.application.output().typed(
+            f'\nYou collected {self.application.state().get("stardust_amount")} units of STARDUST. Well done, Starman!\nYour ship health is {self.application.state().get("health")}%\n')
 
         quit()
 

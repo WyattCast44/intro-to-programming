@@ -117,6 +117,8 @@ class Intro:
 
         self.application.output().typed(message, 0.055)
 
+        self.application.clearConsole()
+
         self.application.state().upsert('next_step', steps[destination])
 
         return
