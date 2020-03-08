@@ -4,7 +4,7 @@ from app.Steps import Intro
 
 class Game:
 
-    banner = """
+    intro = """
                             
         ████████╗██╗  ██╗███████╗                                                                                     
         ╚══██╔══╝██║  ██║██╔════╝                                                                                     
@@ -27,30 +27,44 @@ class Game:
                                          
     """
 
+    outro = """
+        
+        ▄████  ▄▄▄       ███▄ ▄███▓▓█████     ▒█████   ██▒   █▓▓█████  ██▀███  
+        ██▒ ▀█▒▒████▄    ▓██▒▀█▀ ██▒▓█   ▀    ▒██▒  ██▒▓██░   █▒▓█   ▀ ▓██ ▒ ██▒
+        ▒██░▄▄▄░▒██  ▀█▄  ▓██    ▓██░▒███      ▒██░  ██▒ ▓██  █▒░▒███   ▓██ ░▄█ ▒
+        ░▓█  ██▓░██▄▄▄▄██ ▒██    ▒██ ▒▓█  ▄    ▒██   ██░  ▒██ █░░▒▓█  ▄ ▒██▀▀█▄  
+        ░▒▓███▀▒ ▓█   ▓██▒▒██▒   ░██▒░▒████▒   ░ ████▓▒░   ▒▀█░  ░▒████▒░██▓ ▒██▒
+        ░▒   ▒  ▒▒   ▓▒█░░ ▒░   ░  ░░░ ▒░ ░   ░ ▒░▒░▒░    ░ ▐░  ░░ ▒░ ░░ ▒▓ ░▒▓░
+        ░   ░   ▒   ▒▒ ░░  ░      ░ ░ ░  ░     ░ ▒ ▒░    ░ ░░   ░ ░  ░  ░▒ ░ ▒░
+        ░ ░   ░   ░   ▒   ░      ░      ░      ░ ░ ░ ▒       ░░     ░     ░░   ░ 
+            ░       ░  ░       ░      ░  ░       ░ ░        ░     ░  ░   ░     
+                                                            ░                   
+
+    """
+
     def __init__(self, application):
 
         self.application = application
 
-        return
-
-    def run(self):
-
-        # Note the start time
+        # Capture the start time
         self.application.state().upsert('game_start', time())
 
         # Clear the console
         self.application.clearConsole()
 
         # Print the banner
-        self.application.output().success(self.banner)
+        self.application.output().success(self.intro)
 
-        # Set the next step
+        return
+
+    def run(self):
+
+        # Set the first step
         self.application.state().upsert('next_step', Intro)
 
         # Run the game until game over
         while not self.application.state().get('game_over', False):
 
-            # Run the next step of the game
             self.application.state().get('next_step')(self.application, self).run()
 
         return
@@ -61,7 +75,7 @@ class Game:
 
         self.application.state().upsert('game_over', True)
 
-        print('\n\tGame Over.\n')
+        self.application.output().error(self.outro)
 
         quit()
 

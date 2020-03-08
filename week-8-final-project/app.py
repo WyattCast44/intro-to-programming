@@ -1,8 +1,9 @@
 from cliff import Application
-from commands import ResumeGame, StartNewGame, ShowCredits
+from commands import StartNewGame, ShowCredits
+
 
 Application({
-    'name': 'The Adventures of Starman - Final Project',
+    'name': 'The Adventures of Starman',
     'description': 'An interactive game for my final project',
     'version': '1.1.0',
     'interactive': True

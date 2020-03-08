@@ -1,7 +1,8 @@
 import os
 import sys
+from time import sleep
 from .console import Console
-from .support import Repository, Time, HasState, sleep
+from .support import Repository, Time, HasState
 
 
 class Application(Console, HasState):

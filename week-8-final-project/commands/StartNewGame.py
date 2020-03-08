@@ -15,8 +15,8 @@ class StartNewGame:
 
     def handle(self):
 
-        # Let start by clearing the console
         self.application.clearConsole()
 
-        # Lets now start and run the game
         game = Game(self.application).run()
+
+        return
