@@ -1,6 +1,8 @@
+import random
 from time import sleep
 from .Mars import Mars
 from .Moon import Moon
+from .Diner import Diner
 from .Neptune import Neptune
 
 
@@ -82,24 +84,23 @@ class Intro:
     def run(self):
 
         # Print the intro
-        self.application.output().typed(self.intro, 0.055)
+        # self.application.output().typed(self.intro, 0.055)
 
-        # Prompt for destination
-        self.application.output().typed(self.prompt, 0.055)
+        # # Prompt for destination
+        # self.application.output().typed(self.prompt, 0.055)
 
         # Get the destination
         destination = self.application.input().askWithOptions('Where to first?', {
             "mars": "Enter `mars` to go to Mars.",
             "moon": "Enter `moon` to go to Earth's Moon.",
             "neptune": "Enter `neptune` to go to Neptune",
-            # "other": "Enter `other` to let the autopilot choose."
+            "random": "Enter `random` to let the autopilot choose."
         })
 
         # Print a response to destinatio
         self.application.output().typed(
             self.response.replace('[DEST]', destination.title()), 0.055)
 
-        # Clear the console to get ready for next step
         self.application.clearConsole()
 
         # Set the next step based on destination
@@ -107,7 +108,14 @@ class Intro:
             "mars": Mars,
             "moon": Moon,
             "neptune": Neptune,
+            "random": random.choice([Mars, Moon, Neptune, Diner])
         }
+
+        message = """
+        You type the destination into the flight computer and off you go!
+        """
+
+        self.application.output().typed(message, 0.055)
 
         self.application.state().upsert('next_step', steps[destination])
 
