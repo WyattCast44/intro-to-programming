@@ -1,5 +1,5 @@
 from cliff import Application
-from commands import StartNewGame, ShowCredits
+from commands import StartNewGame
 
 
 Application({
@@ -8,6 +8,5 @@ Application({
     'version': '1.1.0',
     'interactive': True
 }).registerCommands([
-    StartNewGame,
-    ShowCredits
+    StartNewGame
 ]).run()
