@@ -37,6 +37,13 @@ class Moon:
 
             sleep(4)
 
+            option = self.application.input().askWithOptions('Quick, what are you going to do?!', [
+                'turn-around',
+                'push-thru',
+            ])
+
+            print(option)
+
         self.game.end()
 
         return
