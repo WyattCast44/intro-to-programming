@@ -1,4 +1,5 @@
 from time import time
+from .Puzzle import Puzzle
 from app.Steps import Intro
 
 
@@ -50,31 +51,11 @@ class Game:
 
         self.application = application
 
-        # Capture the start time
-        self.application.state().upsert('game_start', time())
-
         # Clear the console
         self.application.clearConsole()
 
-        # Set the amount of keys collected
-        self.application.state().set('keys', 0)
-
-        # Set the hero's health
-        self.application.state().set('health', 100)
-
-        self.printWelcomeScript()
-
-        play = self.application.input().askWithOptions('Disregard the warning and search the box, danger be damned?', {
-            'search': "Danger is my middle name, search it!",
-            'leave': "Better play it safe"
-        })
-
-        if play == "search":
-            return
-        else:
-            self.end()
-
-    def printWelcomeScript(self):
+        # Capture the start time
+        self.application.state().upsert('game_start', time())
 
         # Print the banner
         self.application.output().success(self.banner)
@@ -87,15 +68,19 @@ class Game:
 
     def run(self):
 
-        # Set the first step
-        self.application.state().upsert('next_step', Intro)
+        play = self.application.input().askWithOptions('Disregard the warning and search the box, danger be damned?', {
+            'search': "Danger is my middle name, search it!",
+            'leave': "Better play it safe"
+        })
 
-        # Run the game until game over
-        while not self.application.state().get('game_over', False):
+        if play == "search":
 
-            self.application.state().get('next_step')(self.application, self).run()
+            while not self.application.state().get('game_over', False):
 
-        return
+                # TODO implement open slot logic
+                print('eh')
+
+        self.end()
 
     def end(self):
 

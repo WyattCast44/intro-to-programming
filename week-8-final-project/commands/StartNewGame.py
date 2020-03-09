@@ -1,4 +1,6 @@
 from app import Game
+from app import Foxx
+from app import Puzzle
 
 
 class StartNewGame:
@@ -17,6 +19,14 @@ class StartNewGame:
 
         self.application.clearConsole()
 
-        game = Game(self.application).run()
+        game = Game(self.application)
+
+        player = Foxx(game)
+
+        self.application.state().set('game', game)
+        self.application.state().set('player', player)
+        self.application.state().set('puzzle', Puzzle(game, self.application))
+
+        game.run()
 
         return
