@@ -58,13 +58,13 @@ class Game:
         self.application.state().upsert('game_start', time())
 
         # Print the banner
-        self.application.output().success(self.banner)
+        # self.application.output().success(self.banner)
 
-        # Print the intro
-        self.application.output().typed(self.intro, 0.05)
+        # # Print the intro
+        # self.application.output().typed(self.intro, 0.05)
 
-        # Print the warning
-        self.application.output().typed(self.warningMessage, 0.05, 'red')
+        # # Print the warning
+        # self.application.output().typed(self.warningMessage, 0.05, 'red')
 
     def run(self):
 
@@ -77,8 +77,7 @@ class Game:
 
             while not self.application.state().get('game_over', False):
 
-                # TODO implement open slot logic
-                print('eh')
+                self.application.state().get('puzzle').askWhichSlotToOpen()
 
         self.end()
 

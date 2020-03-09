@@ -8,8 +8,10 @@ class Enemy:
 
         return
 
-    def attack(self, player):
-        return
+    def activate(self, player):
 
-    def intro(self):
+        ##
+        ##
+        ##
+
         return

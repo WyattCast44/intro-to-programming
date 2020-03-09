@@ -6,15 +6,10 @@ class Spider:
 
         return
 
-    def intro(self):
+    def activate(self, player):
 
-        return """
-        
-        Ahh!! A massive spider!
+        ##
+        ##
+        ##
 
-             /\ \  / /\
-            //\\ .. //\\
-            //\((  ))/\\
-            /  < `' >  \
-
-        """
+        return
