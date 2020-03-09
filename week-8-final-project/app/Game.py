@@ -20,7 +20,7 @@ class Game:
 
     Your name is Foxx. You are on a quest to find the Lost Temple of Anubis!
     Deep in a underground canvern, you discovered a puzzle box that contains
-    the last six pieces of the lost Amulet. The Amulet is the key to unlocking
+    the last six pieces of the Lost Amulet. The Amulet is the key to unlocking
     the gates to the Temple of Anubis!
 
     The puzzle box had this note attached to it...
@@ -61,10 +61,10 @@ class Game:
         # self.application.output().success(self.banner)
 
         # # Print the intro
-        # self.application.output().typed(self.intro, 0.05)
+        # self.application.output().typed(self.intro, 0.04)
 
         # # Print the warning
-        # self.application.output().typed(self.warningMessage, 0.05, 'red')
+        # self.application.output().typed(self.warningMessage, 0.04, 'red')
 
     def run(self):
 

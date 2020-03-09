@@ -77,6 +77,8 @@ class Puzzle:
             'R4'
         ])
 
+        self.application.clearConsole()
+
         self.showGrid()
 
         column = self.application.input().askWithOptions('Select a column in the row to open:', [
@@ -85,6 +87,8 @@ class Puzzle:
             'C3',
             'C4'
         ])
+
+        self.application.clearConsole()
 
         self.openSlot(row, column)
 
@@ -108,12 +112,8 @@ class Puzzle:
         rowIndex = self.convertRowSelectionToRowIndex(row)
         columnIndex = self.convertColumnSelectionToColumnIndex(column)
 
-        # Active the item in the slot
-        print(f'opening {row}, {column}')
-
-        contents = self.grid[rowIndex][columnIndex]
-
-        print(contents)
+        # Activate the item in the slot
+        self.grid[rowIndex][columnIndex][0](self.application).activate()
 
         return
 
