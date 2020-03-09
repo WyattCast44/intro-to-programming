@@ -55,6 +55,6 @@ class Snake(Enemy):
         healthPts = player.getHealth()
 
         self.application.output().typed(
-            f'\nYour health has dropped to {healthPts}%', 0.05, 'red')
+            f'\nYour health has dropped to {healthPts}%!', 0.05, 'red')
 
         return
