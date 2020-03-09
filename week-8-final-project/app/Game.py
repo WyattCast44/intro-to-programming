@@ -27,7 +27,7 @@ class Game:
     """
 
     warningMessage = """
-        "Be warned, brave adventurer in this box you will find what both what your 
+        "Be warned, brave adventurer in this box you will find both what your 
         heart desires and horrors that will end your journey before it begins. Some 
         secrets are better left undiscovered, this is your last chance..."
     """
