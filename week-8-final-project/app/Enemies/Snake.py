@@ -6,7 +6,7 @@ class Snake(Enemy):
     def __init__(self, application):
 
         super().__init__(name="Giant Snake", healthPoints=15,
-                         attackPoints=10, application=application)
+                         attackPoints=30, application=application)
 
         return
 

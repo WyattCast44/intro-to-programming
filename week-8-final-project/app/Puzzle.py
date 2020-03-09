@@ -10,19 +10,19 @@ class Puzzle:
         Spirit,
         Spider,
         AmuletPiece,
-        AmuletPiece
     ]
 
     def __init__(self, game, application):
 
         self.game = game
+        self.amuletCount = 0
         self.openedSlots = []
         self.application = application
 
         # Define a 4 row grid
         # Each row has 4 columns
-        # Each slot can hold a enemy
-        # or a amulet piece
+        # Each slot can hold a enemy,
+        # a amulet piece, or some other item
 
         self.grid = [
             [[random.choice(self.items)], [random.choice(self.items)], [
@@ -35,7 +35,19 @@ class Puzzle:
                 random.choice(self.items)], [random.choice(self.items)]],  # row 4
         ]
 
+        self.determineAmountOfAmulets()
+
         return
+
+    def determineAmountOfAmulets(self):
+
+        for row in self.grid:
+
+            for slot in row:
+
+                if slot[0].__name__ == "AmuletPiece":
+
+                    self.amuletCount = self.amuletCount + 1
 
     def showGrid(self):
 
@@ -59,7 +71,7 @@ class Puzzle:
 
             if index in self.openedSlots:
                 # Slot opened
-                gridDisplay.replace(f'G{index}', '  ', 1)
+                gridDisplay = gridDisplay.replace(f'G{index}', '  ', 1)
             else:
                 # Slot not opened
                 gridDisplay = gridDisplay.replace(f'G{index}', '??', 1)
@@ -71,10 +83,10 @@ class Puzzle:
         self.showGrid()
 
         row = self.application.input().askWithOptions('Select a row to open a slot:', [
-            'R1',
-            'R2',
-            'R3',
-            'R4'
+            'r1',
+            'r2',
+            'r3',
+            'r4'
         ])
 
         self.application.clearConsole()
@@ -82,10 +94,10 @@ class Puzzle:
         self.showGrid()
 
         column = self.application.input().askWithOptions('Select a column in the row to open:', [
-            'C1',
-            'C2',
-            'C3',
-            'C4'
+            'c1',
+            'c2',
+            'c3',
+            'c4'
         ])
 
         self.application.clearConsole()
@@ -119,6 +131,9 @@ class Puzzle:
 
     def convertRowAndColumnToGridNumber(self, row, column):
 
+        row = row.upper()
+        column = column.upper()
+
         base = 0
 
         if row == "R1":
@@ -143,6 +158,8 @@ class Puzzle:
 
     def convertRowSelectionToRowIndex(self, row):
 
+        row = row.upper()
+
         if row == "R1":
             index = 0
         elif row == "R2":
@@ -155,6 +172,8 @@ class Puzzle:
         return index
 
     def convertColumnSelectionToColumnIndex(self, column):
+
+        column = column.upper()
 
         if column == "C1":
             index = 0

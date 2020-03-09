@@ -42,7 +42,9 @@ class AmuletPiece:
 
         count = player.getAmuletCount()
 
+        remaining = self.application.state().get('puzzle').amuletCount - count
+
         self.application.output().typed(
-            f'You have collected {count} Amulet pieces so far!', 0.05, 'green')
+            f'You have collected {count} Amulet pieces so far, only {remaining} to go!', 0.05, 'green')
 
         return

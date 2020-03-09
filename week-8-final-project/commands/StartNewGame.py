@@ -21,7 +21,7 @@ class StartNewGame:
 
         game = Game(self.application)
 
-        player = Foxx(game)
+        player = Foxx(game, self.application)
 
         self.application.state().set('game', game)
         self.application.state().set('player', player)

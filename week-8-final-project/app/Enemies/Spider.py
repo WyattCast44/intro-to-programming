@@ -6,7 +6,7 @@ class Spider(Enemy):
     def __init__(self, application):
 
         super().__init__(name="Massive Spider", healthPoints=5,
-                         attackPoints=20, application=application)
+                         attackPoints=25, application=application)
 
         return
 
@@ -16,7 +16,7 @@ class Spider(Enemy):
 
         art = """
 
-            (\n               )\n              (\n        /\\  .-\"\"\"-.  /\\\n       //\\\\/  ,,,  \\//\\\\\n       |/\\| ,;;;;   |/\\|\n       //\\\\\\;-\"\"\"-;///\\\\\n      //  \\/   .   \\/  \\\\\n     (| ,-_| \\ | / |_-, |)\n       //`__\\.-  /__`\\\\\n      // /.-(() ())-.\\ \\\\\n     (\\ |)   \'---\'   (| /)\n      ` (|           |) `\njgs     \\)         (/
+            (\n               )\n              (\n        /\\  .-\"\"\"-.  /\\\n       //\\\\/  ,,,  \\//\\\\\n       |/\\| ,;;;;   |/\\|\n       //\\\\\\;-\"\"\"-;///\\\\\n      //  \\/   .   \\/  \\\\\n     (| ,-_| \\ | / |_-, |)\n       //`__\\.-  /__`\\\\\n      // /.-(() ())-.\\ \\\\\n     (\\ |)   \'---\'   (| /)\n      ` (|           |) `\n        \\)         (/
 
         """
 
