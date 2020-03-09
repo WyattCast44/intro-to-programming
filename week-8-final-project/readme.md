@@ -1,6 +1,6 @@
 # Maryville - SV600 - Intro to Programming Final Project
 
-This is my submission for the final project, it is a classic text adventure game, called "The Lost Temple of Anubis"
+This is my submission for the final project, it is a text adventure game, called "The Lost Temple of Anubis"
 
 # Questions
 
