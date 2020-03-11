@@ -1,6 +1,5 @@
 from time import time
 from .Puzzle import Puzzle
-from app.Steps import Intro
 
 
 class Game:
