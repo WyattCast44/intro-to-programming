@@ -1,8 +1,12 @@
+# SWDV 600 - Intro to Programming
+
+This repository is my code for my Intro To Programming class (SWDV 600).
+
 # Disclaimer
 
-These problems are posted as is, with no guarantees, to include no guarantee of correctness. 
+This code is posted as is, with no guarantees, warranties, or other assurance that the code is correct.
 
-# License
+## License
 
 You may use the contents of this repository for studying/practice only. No other uses are authorized, to include using code verbatim in any academic assignment.
 
@@ -10,7 +14,8 @@ Again, this code is only for review. This code may not be used or deployed for a
 
 ## Exceptions
 
-The following files were not created by me and may be used in accordance with thier respective licences.
+ - Any libraries included in the source, not written by me, are governed by thier respective licenses.
+ - The following files were not created by me and may be used in accordance with thier respective licences.
 
 - `graphics.py`
 
