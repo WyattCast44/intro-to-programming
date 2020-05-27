@@ -14,9 +14,7 @@ Again, this code is only for review. This code may not be used or deployed for a
 
 ## Exceptions
 
- - Any libraries included in the source, not written by me, are governed by thier respective licenses.
- - The following files were not created by me and may be used in accordance with thier respective licences.
-
-- `graphics.py`
+ - Any libraries included in the source, not written by me, are governed by thier respective licenses. For example:
+    - `graphics.py`
 
 
